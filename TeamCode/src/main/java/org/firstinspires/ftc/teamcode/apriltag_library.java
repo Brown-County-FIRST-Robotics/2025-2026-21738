@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -85,23 +85,22 @@ import java.util.concurrent.TimeUnit;
  *
  */
 
-@TeleOp(name="Omni Drive To AprilTag!!!", group = "Concept")
-public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
-
-{
+@TeleOp(name="Omni Drive To AprilTag Test 2", group = "Concept")
+@Disabled // remove
+public class apriltag_library extends LinearOpMode {
     // Adjust these numbers to suit your robot.
-    final double DESIRED_DISTANCE = 25.0; //  this is how close the camera should get to the target (inches)
+    double DESIRED_DISTANCE = 25.0; //  this is how close the camera should get to the target (inches)
 
     //  Set the GAIN constants to control the relationship between the measured position error, and how much power is
     //  applied to the drive motors to correct the error.
     //  Drive = Error * Gain    Make these values smaller for smoother control, or larger for a more aggressive response.
     final double SPEED_GAIN  =  0.02  ;   //  Forward Speed Control "Gain". e.g. Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
-    final double STRAFE_GAIN =  0.015 ;   //  Strafe Speed Control "Gain".  e.g. Ramp up to 37% power at a 25 degree Yaw error.   (0.375 / 25.0)
+    final double STRAFE_GAIN =  0.01 ;   // was 0.015//  Strafe Speed Control "Gain".  e.g. Ramp up to 37% power at a 25 degree Yaw error.   (0.375 / 25.0)
     final double TURN_GAIN   =  0.01  ;   //  Turn Control "Gain".  e.g. Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
 
-    final double MAX_AUTO_SPEED = 1.0;   //  i changed from .5 //Clip the approach speed to this max value (adjust for your robot)
+    final double MAX_AUTO_SPEED = 0.75;   //  i changed from .5 //Clip the approach speed to this max value (adjust for your robot)
     final double MAX_AUTO_STRAFE= 0.5;   //  Clip the strafing speed to this max value (adjust for your robot)
-    final double MAX_AUTO_TURN  = 0.5;   // i changed from .3 // Clip the turn speed to this max value (adjust for your robot)
+    final double MAX_AUTO_TURN  = 0.3;   // i changed from .3 // Clip the turn speed to this max value (adjust for your robot)
 
     private DcMotor frontLeftDrive = null;  //  Used to control the left front drive wheel
     private DcMotor frontRightDrive = null;  //  Used to control the right front drive wheel
@@ -113,6 +112,9 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
     private VisionPortal visionPortal;               // Used to manage the video source.
     private AprilTagProcessor aprilTag;              // Used for managing the AprilTag detection process.
     private AprilTagDetection desiredTag = null;     // Used to hold the data for a detected AprilTag
+
+    private double minPower = 0.1;
+    private double lowPower = 0.025;
 
     @Override public void runOpMode()
     {
@@ -142,6 +144,7 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
 
         if (USE_WEBCAM)
             setManualExposure(6, 250);  // Use low exposure time to reduce motion blur
+
 
         // Wait for driver to press start
         telemetry.addData("Camera preview on/off", "3 dots, Camera Stream");
@@ -185,6 +188,15 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
             } else {
                 telemetry.addData("\n>","Drive using joysticks to find valid target\n");
             }
+
+            if (gamepad1.y) {
+                DESIRED_DISTANCE = 25;
+            }else if (gamepad1.b) {
+                DESIRED_DISTANCE = 50;
+            }else if (gamepad1.a) {
+                DESIRED_DISTANCE = 75;
+            }
+
 
             // If Left Bumper is being pressed, AND we have found the desired target, Drive to target Automatically .
             if (gamepad1.left_bumper && targetFound) {
@@ -244,7 +256,37 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
             backRightPower /= max;
         }
 
-        // Send powers to the wheels.
+        // set min power
+        if (Math.abs(frontLeftPower) < minPower && Math.abs(frontLeftPower) > lowPower) {
+            if (frontLeftPower > 0) {
+                frontLeftPower = minPower;
+            }else {
+                frontLeftPower = minPower * -1;
+            }
+        }
+        if (Math.abs(frontRightPower) < minPower && Math.abs(frontRightPower) > lowPower) {
+            if (frontRightPower > 0) {
+                frontRightPower = minPower;
+            }else {
+                frontRightPower = minPower * -1;
+            }
+        }
+        if (Math.abs(backLeftPower) < minPower && Math.abs(backLeftPower) > lowPower) {
+            if (backLeftPower > 0) {
+                backLeftPower = minPower;
+            }else {
+                backLeftPower = minPower * -1;
+            }
+        }
+        if (Math.abs(backRightPower) < minPower && Math.abs(backRightPower) > lowPower) {
+            if (backRightPower > 0) {
+                backRightPower = minPower;
+            }else {
+                backRightPower = minPower * -1;
+            }
+        }
+
+        // Send powers to the wheels
         frontLeftDrive.setPower(frontLeftPower);
         frontRightDrive.setPower(frontRightPower);
         backLeftDrive.setPower(backLeftPower);
@@ -285,7 +327,7 @@ public class RobotAutoDriveToAprilTagOmni extends LinearOpMode
      Manually set the camera gain and exposure.
      This can only be called AFTER calling initAprilTag(), and only works for Webcams;
     */
-    private void    setManualExposure(int exposureMS, int gain) {
+    private void setManualExposure(int exposureMS, int gain) {
         // Wait for the camera to be open, then use the controls
 
         if (visionPortal == null) {
