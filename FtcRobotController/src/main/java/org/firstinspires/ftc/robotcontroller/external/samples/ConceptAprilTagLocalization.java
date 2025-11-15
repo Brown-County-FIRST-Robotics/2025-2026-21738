@@ -65,7 +65,6 @@ import java.util.List;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
 @TeleOp(name = "Concept: AprilTag Localization", group = "Concept")
-@Disabled
 public class ConceptAprilTagLocalization extends LinearOpMode {
 
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
@@ -95,7 +94,7 @@ public class ConceptAprilTagLocalization extends LinearOpMode {
      * to +/-90 degrees if it's vertical, or 180 degrees if it's upside-down.
      */
     private Position cameraPosition = new Position(DistanceUnit.INCH,
-            0, 0, 0, 0);
+            0, 18.5, 0, 0);
     private YawPitchRollAngles cameraOrientation = new YawPitchRollAngles(AngleUnit.DEGREES,
             0, -90, 0, 0);
 
@@ -158,6 +157,7 @@ public class ConceptAprilTagLocalization extends LinearOpMode {
                 //.setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
                 //.setTagLibrary(AprilTagGameDatabase.getCenterStageTagLibrary())
                 //.setOutputUnits(DistanceUnit.INCH, AngleUnit.DEGREES)
+                .setLensIntrinsics(961.881, 961.881, 339.47, 266.764)
                 .setCameraPose(cameraPosition, cameraOrientation)
 
                 // == CAMERA CALIBRATION ==
@@ -234,6 +234,7 @@ public class ConceptAprilTagLocalization extends LinearOpMode {
                             detection.robotPose.getOrientation().getPitch(AngleUnit.DEGREES),
                             detection.robotPose.getOrientation().getRoll(AngleUnit.DEGREES),
                             detection.robotPose.getOrientation().getYaw(AngleUnit.DEGREES)));
+                    telemetry.addData("Decision Margin", detection.decisionMargin);
                 }
             } else {
                 telemetry.addLine(String.format("\n==== (ID %d) Unknown", detection.id));

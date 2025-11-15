@@ -88,11 +88,18 @@ public class sensorTest extends LinearOpMode {
             Pose2D poseP = pinpoint.getPosition();
             SparkFunOTOS.Pose2D poseO = myOtos.getPosition();
 
+
+
             // Inform user of available controls
             telemetry.addLine("Press Y (triangle) on Gamepad to reset tracking");
             telemetry.addLine("Press X (square) on Gamepad to calibrate the IMUs");
             telemetry.addLine("drive with joysticks");
             telemetry.addLine();
+
+            poseO.x=-poseO.x;
+            double t = poseO.x;
+            poseO.x = poseO.y;
+            poseO.y = t;
 
             // Log the position to the telemetry
             telemetry.addData("OTOS X coordinate", poseO.x);
@@ -100,12 +107,12 @@ public class sensorTest extends LinearOpMode {
             telemetry.addData("OTOS Heading angle", poseO.h);
 
             // switch pinpoint y and x
-            telemetry.addData("pinpoint X coordinate", -poseP.getY(DistanceUnit.INCH));
-            telemetry.addData("pinpoint Y coordinate", -poseP.getX(DistanceUnit.INCH));
+            telemetry.addData("pinpoint X coordinate", poseP.getX(DistanceUnit.INCH));
+            telemetry.addData("pinpoint Y coordinate", poseP.getY(DistanceUnit.INCH));
             telemetry.addData("pinpoint Heading angle", poseP.getHeading(AngleUnit.DEGREES));
 
-            telemetry.addData("X diff", Math.abs((-poseP.getY(DistanceUnit.INCH))-poseO.x));
-            telemetry.addData("Y diff", Math.abs((-poseP.getX(DistanceUnit.INCH))-poseO.y));
+            telemetry.addData("X diff", Math.abs((poseP.getX(DistanceUnit.INCH))-poseO.x));
+            telemetry.addData("Y diff", Math.abs((poseP.getY(DistanceUnit.INCH))-poseO.y));
             telemetry.addData("angle diff", Math.abs(poseP.getHeading(AngleUnit.DEGREES)-poseO.h));
 
             // driving code
@@ -156,7 +163,7 @@ public class sensorTest extends LinearOpMode {
          *  The Y pod offset refers to how far forwards from the tracking point the Y (strafe) odometry pod is.
          *  Forward of center is a positive number, backwards is a negative number.
          */
-        pinpoint.setOffsets(-175, -50, DistanceUnit.MM); //these are tuned for 3110-0002-0001 Product Insight #1
+        pinpoint.setOffsets(-75, -175, DistanceUnit.MM); //these are tuned for 3110-0002-0001 Product Insight #1
 
         /*
          * Set the kind of pods used by your robot. If you're using goBILDA odometry pods, select either
@@ -172,7 +179,7 @@ public class sensorTest extends LinearOpMode {
          * increase when you move the robot forward. And the Y (strafe) pod should increase when
          * you move the robot to the left.
          */
-        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD,
+        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED,
                 GoBildaPinpointDriver.EncoderDirection.FORWARD);
 
         /*
