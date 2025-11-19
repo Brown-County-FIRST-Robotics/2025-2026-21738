@@ -1,10 +1,20 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.seattlesolvers.solverslib.command.CommandBase;
+import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
 public class Test extends CommandBase {
 
     TestSubsystem m_subsystem;
+   // GamepadEx driverOp = new GamepadEx(gamepad1);
+    //GamepadEx toolOp = new GamepadEx(gamepad2);
+
+
+
 
     public Test(TestSubsystem subsystem) {
         m_subsystem = subsystem;
@@ -15,7 +25,9 @@ public class Test extends CommandBase {
 
     @Override
     public void initialize() {
+
         m_subsystem.laungture.setPower(1);
+
     }
     @Override
     public void execute() {
