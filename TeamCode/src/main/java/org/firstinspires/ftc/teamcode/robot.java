@@ -33,8 +33,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
-
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 // this code is for the robot when it is done
@@ -44,14 +46,18 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 // ####################################################
 
 
-@TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-@Disabled // remove
+@TeleOp(name="robot", group="Linear OpMode")
 public class robot extends LinearOpMode {
     DcMotor frontLeftDrive;
     DcMotor backLeftDrive;
     DcMotor frontRightDrive;
     DcMotor backRightDrive;
     DcMotor intake;
+    DcMotorEx launcher;
+    Servo servo;
+    double servoMax;
+    double max = 85;
+    double launcherSpeed = 0;
     @Override
     public void runOpMode() {
 
@@ -59,10 +65,12 @@ public class robot extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         // Declare OpMode members for each of the 4 motors.
         intake = hardwareMap.get(DcMotor.class, "intake");
+        launcher = hardwareMap.get(DcMotorEx.class, "launcher");
         frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeftDrive");
         backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
         frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
         backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
+        servo = hardwareMap.get(Servo.class, "servo");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -79,10 +87,13 @@ public class robot extends LinearOpMode {
         frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
         backRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
+        intake.setDirection(DcMotor.Direction.REVERSE);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(.1, 0, 0, 13.3));
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
@@ -96,29 +107,47 @@ public class robot extends LinearOpMode {
             }else {
                 intake.setPower(0);
             }
-
             // set intake roller speed to left lever
             intake.setPower(gamepad1.left_trigger);
 
             // launch ball when right button pressed
             if (gamepad1.right_bumper) {
-                launch();
+                launcher.setVelocity(launcherSpeed);
+            }else {
+                launcher.setVelocity(0);
             }
+
+            if (gamepad1.yWasPressed()) {
+                float servoMax = (float)(max/300.0);
+                servo.setPosition(servoMax);
+            }
+            if (gamepad1.aWasPressed()) {
+                servo.setPosition(0.0);
+            }
+
+            if (gamepad1.dpadUpWasPressed()) {
+                launcherSpeed += 50;
+            }
+            if (gamepad1.dpadDownWasPressed()) {
+                launcherSpeed -= 50;
+            }
+
+
+
 
             // make sure location has time to update all its locations
             updateLocation();
 
             // other code here
-
+            telemetry.addData("max", max);
+            telemetry.addData("speed", launcherSpeed);
+            telemetry.addData("real speed", launcher.getVelocity());
             telemetry.update();
         }
     }
 
     private void updateLocation() {
         // location update code here update pinpoint/optical/apriltag
-    }
-    private void launch() {
-        // launching code here
     }
 
     private void driveRobot(Gamepad pad) {

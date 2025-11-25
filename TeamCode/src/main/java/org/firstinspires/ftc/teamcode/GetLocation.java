@@ -48,7 +48,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 
-import org.firstinspires.ftc.teamcode.Location;
+
 
 
 import java.util.List;
@@ -58,14 +58,13 @@ import java.util.concurrent.TimeUnit;
 // Fx: 621.179 Fy: 621.179
 // Cx: 340.592 Cy: 262.658
 
-@TeleOp(name="get location", group = "Concept")
+@TeleOp(name="get location V2", group = "Concept")
 public class GetLocation extends LinearOpMode {
     //  Set the GAIN constants to control the relationship between the measured position error, and how much power is
 
     private static final boolean USE_WEBCAM = true;  // Set true to use a webcam, or false for a phone camera
     private VisionPortal visionPortal;               // Used to manage the video source.
     private AprilTagProcessor aprilTag;             // Used for managing the AprilTag detection process.
-
     @Override public void runOpMode()
     {
         boolean targetFound     = false;    // Set to true when an AprilTag target is detected
@@ -84,7 +83,7 @@ public class GetLocation extends LinearOpMode {
         // Wait for driver to press start
         waitForStart();
 
-        Location poseEstimater = new Location(aprilTag, myOtos);
+        Location poseEstimater = new Location(aprilTag, myOtos, telemetry);
 
         while (opModeIsActive())
         {
@@ -93,6 +92,9 @@ public class GetLocation extends LinearOpMode {
             telemetry.addData("x", pose.getX(DistanceUnit.INCH));
             telemetry.addData("y", pose.getY(DistanceUnit.INCH));
             telemetry.addData("h", pose.getHeading(AngleUnit.DEGREES));
+            if (aprilTag.getDetections().size() > 0) {
+                telemetry.addData("apriltag seen", "");
+            }
             telemetry.update();
 
             sleep(10);
@@ -115,11 +117,10 @@ public class GetLocation extends LinearOpMode {
     private void initAprilTag() {
         // Create the AprilTag processor by using a builder.
 
-        // Fx: 961.881 Fy: 961.881
-        // Cx: 339.47 Cy: 266.764
+
 
         AprilTagProcessor.Builder aprilTagbuilder = new AprilTagProcessor.Builder();
-        aprilTagbuilder.setLensIntrinsics(961.881, 961.881, 339.47, 266.764);
+        // needs work: aprilTagbuilder.setLensIntrinsics(961.881, 961.881, 339.47, 266.764);
         aprilTag = aprilTagbuilder.build();
 
         // Adjust Image Decimation to trade-off detection-range for detection-rate.
