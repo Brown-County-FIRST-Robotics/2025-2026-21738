@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 // this code is for the robot when it is done
@@ -58,6 +59,8 @@ public class robot extends LinearOpMode {
     double servoMax;
     double max = 85;
     double launcherSpeed = 0;
+
+    private ElapsedTime runtime = new ElapsedTime();
     @Override
     public void runOpMode() {
 
@@ -93,7 +96,8 @@ public class robot extends LinearOpMode {
         telemetry.update();
 
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(.1, 0, 0, 13.3));
+        // old values launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(.1, 0, 0, 13.3));
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(1.17025, 0.117025, 0, 11.7025));
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
@@ -142,6 +146,9 @@ public class robot extends LinearOpMode {
             telemetry.addData("max", max);
             telemetry.addData("speed", launcherSpeed);
             telemetry.addData("real speed", launcher.getVelocity());
+            telemetry.addData(".startTimeNanoseconds()", runtime.startTimeNanoseconds());
+            telemetry.addData(".time()", runtime.time());
+            telemetry.addData(".startTime()", runtime.startTime());
             telemetry.update();
         }
     }

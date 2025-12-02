@@ -18,9 +18,11 @@ public class Location {
     SparkFunOTOS optical;
     CameraCode apriltag;
     Telemetry display;
+    ElapsedTime time;
     private Pose2D estimate;
     public Location(AprilTagProcessor camera, SparkFunOTOS optical, Telemetry display) {//, GoBildaPinpointDriver pinpoint) {
         this.pinpoint = pinpoint;
+        this.time = new ElapsedTime();
         this.optical = optical;
         apriltag = new CameraCode(camera);
         this.display = display;
@@ -42,21 +44,23 @@ public class Location {
                 if (detection.metadata != null) {
                     // Only use tags that don't have Obelisk in them
                     if (!detection.metadata.name.contains("Obelisk")) {
-                        long t = detection.frameAcquisitionNanoTime;
+                        double t = (detection.frameAcquisitionNanoTime / 1000000000.0);
                         int id = detection.id;
-                        long system = System.nanoTime();
-                        display.addLine("tag: " + id + " time: " + t / 1000000000.0 + " tag delay: " + (system - t));
-                        double x = detection.robotPose.getPosition().x;
-                        double y = detection.robotPose.getPosition().y;
-                        double h = detection.robotPose.getOrientation().getYaw(AngleUnit.DEGREES);
-                        // detection.decisionMargin;
+                        double system = (this.time.startTime() + time.time());
+                        display.addLine("tag: " + id + " time: " + t + " tag delay: " + (system - t));
+                        if (system - t <= 0.05 && system >= t) {
+                            double x = detection.robotPose.getPosition().x;
+                            double y = detection.robotPose.getPosition().y;
+                            double h = detection.robotPose.getOrientation().getYaw(AngleUnit.DEGREES);
+                            // detection.decisionMargin;
 
-                        // update
-                        double betterX = (estimate.getX(DistanceUnit.INCH) * 1 + x * 1) / 2;
-                        double betterY = (estimate.getY(DistanceUnit.INCH) * 1 + y * 1) / 2;
-                        double betterH = (estimate.getHeading(AngleUnit.DEGREES) * 1 + h * 1) / 2;
-                        estimate = new Pose2D(DistanceUnit.INCH, betterX, betterY, AngleUnit.DEGREES, betterH);
-                        SetPoseOptical(estimate);
+                            // update
+                            double betterX = (estimate.getX(DistanceUnit.INCH) * 1 + x * 1) / 2;
+                            double betterY = (estimate.getY(DistanceUnit.INCH) * 1 + y * 1) / 2;
+                            double betterH = (estimate.getHeading(AngleUnit.DEGREES) * 1 + h * 1) / 2;
+                            estimate = new Pose2D(DistanceUnit.INCH, betterX, betterY, AngleUnit.DEGREES, betterH);
+                            SetPoseOptical(estimate);
+                        }
                     }
                 }
             }

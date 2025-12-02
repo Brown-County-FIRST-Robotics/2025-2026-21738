@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -65,6 +66,7 @@ public class GetLocation extends LinearOpMode {
     private static final boolean USE_WEBCAM = true;  // Set true to use a webcam, or false for a phone camera
     private VisionPortal visionPortal;               // Used to manage the video source.
     private AprilTagProcessor aprilTag;             // Used for managing the AprilTag detection process.
+
     @Override public void runOpMode()
     {
         boolean targetFound     = false;    // Set to true when an AprilTag target is detected
