@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.seattlesolvers.solverslib.command.CommandBase;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
@@ -26,7 +27,7 @@ public  class TestSubsystem extends SubsystemBase {
     private DcMotor backLeft = null;
     private DcMotor backRight = null;*/
     private DcMotor intake = null;
-    DcMotorEx laungture = null;
+    DcMotorEx shooter = null;
 
     Servo kicker = null;
     GamepadEx gamepadEx;
@@ -46,7 +47,7 @@ public  class TestSubsystem extends SubsystemBase {
         backLeft = hMap.get(DcMotor.class, "backLeft");
         backRight = hMap.get(DcMotor.class, "backRight");*/
         intake = hMap.get(DcMotor.class, "intake");
-        laungture = hMap.get(DcMotorEx.class, "Laungture");
+        shooter = hMap.get(DcMotorEx.class, "shooter");
 
         kicker = hMap.get(Servo.class, "kicker");
 
@@ -59,7 +60,8 @@ public  class TestSubsystem extends SubsystemBase {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);*/
         intake.setDirection(DcMotor.Direction.FORWARD);
-        laungture.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(1.17025, .117025, 0, 11.7025));
 
 
     }
@@ -87,7 +89,7 @@ public  class TestSubsystem extends SubsystemBase {
         double swallow = gamepadEx.gamepad.right_trigger;
 
 
-        float laugture = gamepadEx.gamepad.left_stick_x;
+        float shooter = gamepadEx.gamepad.left_stick_x;
 
 
      /*   frontLeft.setPower(-0.75 * signedSquare(rotation + strafing + movement));

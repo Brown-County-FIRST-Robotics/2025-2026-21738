@@ -30,7 +30,7 @@ public class TestOpMode extends CommandOpMode {
         Button exampleButton = new GamepadButton(
                 gamepadEx, GamepadKeys.Button.A
         );
-        exampleButton.whenPressed(new Test(s));
+        exampleButton.whenPressed(new Test(s, telemetry));
     }
 
 }

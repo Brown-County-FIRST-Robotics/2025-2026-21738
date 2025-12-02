@@ -1,23 +1,25 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.seattlesolvers.solverslib.command.CommandBase;
-import com.seattlesolvers.solverslib.gamepad.GamepadEx;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Test extends CommandBase {
 
     TestSubsystem m_subsystem;
+    Telemetry m_telemetry;
+    boolean isFinished =false;
    // GamepadEx driverOp = new GamepadEx(gamepad1);
     //GamepadEx toolOp = new GamepadEx(gamepad2);
 
 
 
 
-    public Test(TestSubsystem subsystem) {
+    public Test(TestSubsystem subsystem, Telemetry telemetry) {
         m_subsystem = subsystem;
+        m_telemetry = telemetry;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -25,20 +27,28 @@ public class Test extends CommandBase {
 
     @Override
     public void initialize() {
-
-        m_subsystem.laungture.setPower(1);
-
+        isFinished =false;
+        m_subsystem.kicker.setPosition(0);
+        m_telemetry.addLine("IN");
+        m_subsystem.shooter.setPower(-1);
+        m_telemetry.update();
     }
     @Override
     public void execute() {
-        if (m_subsystem.laungture.getVelocity() > 1200) {
-            m_subsystem.kicker.setPosition(.75);
+        m_telemetry.addLine("EX");
+        m_telemetry.update();
+        if (m_subsystem.shooter.getVelocity() > 1200) {
+            m_subsystem.kicker.setPosition(85/300.0);
+
+            m_subsystem.shooter.setPower(0);
+            isFinished=true;
         }
     }
 
     @Override
     public boolean isFinished() {
-        return m_subsystem.laungture.getVelocity() > 1200;
+
+        return isFinished;
 
     }
 
