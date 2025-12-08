@@ -96,8 +96,10 @@ public class robot extends LinearOpMode {
         telemetry.update();
 
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        launcher.setDirection(DcMotorEx.Direction.REVERSE);
         // old values launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(.1, 0, 0, 13.3));
-        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(1.17025, 0.117025, 0, 11.7025));
+        // launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(1.17025, 0.117025, 0, 11.7025));
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(-300, 0, 0, -15.7025));
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
@@ -146,9 +148,9 @@ public class robot extends LinearOpMode {
             telemetry.addData("max", max);
             telemetry.addData("speed", launcherSpeed);
             telemetry.addData("real speed", launcher.getVelocity());
-            telemetry.addData(".startTimeNanoseconds()", runtime.startTimeNanoseconds());
-            telemetry.addData(".time()", runtime.time());
-            telemetry.addData(".startTime()", runtime.startTime());
+            // telemetry.addData(".startTimeNanoseconds()", runtime.startTimeNanoseconds());
+            // telemetry.addData(".time()", runtime.time());
+            // telemetry.addData(".startTime()", runtime.startTime());
             telemetry.update();
         }
     }
