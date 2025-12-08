@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.seattlesolvers.solverslib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Test extends CommandBase {
+public class ShootCommand extends CommandBase {
 
-    TestSubsystem m_subsystem;
+    ShooterSubsystem m_subsystem;
     Telemetry m_telemetry;
     boolean isFinished =false;
    // GamepadEx driverOp = new GamepadEx(gamepad1);
@@ -17,7 +15,8 @@ public class Test extends CommandBase {
 
 
 
-    public Test(TestSubsystem subsystem, Telemetry telemetry) {
+
+    public ShootCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
         m_subsystem = subsystem;
         m_telemetry = telemetry;
         // Use addRequirements() here to declare subsystem dependencies.
@@ -29,6 +28,7 @@ public class Test extends CommandBase {
     public void initialize() {
         isFinished =false;
         m_subsystem.kicker.setPosition(0);
+
         m_telemetry.addLine("IN");
         m_subsystem.shooter.setPower(-1);
         m_telemetry.update();
@@ -44,6 +44,9 @@ public class Test extends CommandBase {
             isFinished=true;
         }
     }
+
+
+
 
     @Override
     public boolean isFinished() {
