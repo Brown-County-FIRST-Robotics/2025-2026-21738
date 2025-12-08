@@ -26,6 +26,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
     Servo kicker = null;
     Servo flap = null;
+    Servo door = null;
     GamepadEx gamepadEx;
 
 
@@ -43,14 +44,15 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         kicker = hMap.get(Servo.class, "kicker");
         flap = hMap.get(Servo.class, "flap");
+        door = hMap.get(Servo.class "door");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         intake.setDirection(DcMotor.Direction.FORWARD);
-        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
-        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(1.17025, .117025, 0, 11.7025));
+        shooter.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 15.7025));
 
 
     }

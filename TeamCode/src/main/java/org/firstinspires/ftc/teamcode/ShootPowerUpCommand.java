@@ -4,7 +4,7 @@ import com.seattlesolvers.solverslib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class ShootCommand extends CommandBase {
+public class ShootPowerUpCommand extends CommandBase {
 
     ShooterSubsystem m_subsystem;
     Telemetry m_telemetry;
@@ -16,7 +16,7 @@ public class ShootCommand extends CommandBase {
 
 
 
-    public ShootCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
+    public ShootPowerUpCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
         m_subsystem = subsystem;
         m_telemetry = telemetry;
         // Use addRequirements() here to declare subsystem dependencies.
@@ -30,7 +30,7 @@ public class ShootCommand extends CommandBase {
         m_subsystem.kicker.setPosition(0);
 
         m_telemetry.addLine("IN");
-        m_subsystem.shooter.setPower(-1);
+        m_subsystem.shooter.setVelocity(1200);
         m_telemetry.update();
     }
     @Override
@@ -40,7 +40,7 @@ public class ShootCommand extends CommandBase {
         if (m_subsystem.shooter.getVelocity() > 1200) {
             m_subsystem.kicker.setPosition(85/300.0);
 
-            m_subsystem.shooter.setPower(0);
+//            m_subsystem.shooter.setPower(0);
             isFinished=true;
         }
     }
