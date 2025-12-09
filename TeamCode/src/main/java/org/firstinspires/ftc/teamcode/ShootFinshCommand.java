@@ -42,6 +42,7 @@ public class ShootFinshCommand extends CommandBase {
         if (m_timer.seconds() > 1.0) {
             m_subsystem.kicker.setPosition(0);
             m_subsystem.shooter.setPower(0);
+            m_subsystem.door.setPosition(1);
             isFinished=true;
         }
     }
