@@ -44,7 +44,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         kicker = hMap.get(Servo.class, "kicker");
         flap = hMap.get(Servo.class, "flap");
-        door = hMap.get(Servo.class "door");
+        door = hMap.get(Servo.class, "door");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.

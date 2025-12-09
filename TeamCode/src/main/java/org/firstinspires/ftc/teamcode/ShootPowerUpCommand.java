@@ -28,6 +28,7 @@ public class ShootPowerUpCommand extends CommandBase {
     public void initialize() {
         isFinished =false;
         m_subsystem.kicker.setPosition(0);
+        door
 
         m_telemetry.addLine("IN");
         m_subsystem.shooter.setVelocity(1200);
