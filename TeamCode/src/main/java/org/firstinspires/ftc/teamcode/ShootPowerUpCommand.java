@@ -28,26 +28,17 @@ public class ShootPowerUpCommand extends CommandBase {
     public void initialize() {
         isFinished =false;
         m_subsystem.kicker.setPosition(0);
-        m_subsystem.door.setPosition(225);
-
-        m_telemetry.addLine("IN");
         m_subsystem.shooter.setVelocity(1200);
-        m_telemetry.update();
     }
     @Override
     public void execute() {
-        m_telemetry.addLine("EX");
-        m_telemetry.update();
         if (m_subsystem.shooter.getVelocity() > 1200) {
-            m_subsystem.kicker.setPosition(85/300.0);
+         //   m_subsystem.kicker.setPosition(85/300.0);
 
 //            m_subsystem.shooter.setPower(0);
             isFinished=true;
         }
     }
-
-
-
 
     @Override
     public boolean isFinished() {

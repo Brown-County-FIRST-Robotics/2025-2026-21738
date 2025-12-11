@@ -55,6 +55,10 @@ public  class ShooterSubsystem extends SubsystemBase {
         shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 15.7025));
 
 
+        this.door.setPosition(0);
+        this.kicker.setPosition(0);
+        this.shooter.setVelocity(0);
+
     }
 
     /*

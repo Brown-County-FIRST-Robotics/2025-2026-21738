@@ -73,21 +73,32 @@ public  class DrivebaseSubsystem extends SubsystemBase {
 
 
 
-        double rotation = gamepadEx.gamepad.left_stick_y; //turning drive chassis
-        double movement = -gamepadEx.gamepad.left_stick_x;//Forward/backward drive chassis
-        double strafing = -gamepadEx.gamepad.right_stick_x;
-        double swallow = gamepadEx.gamepad.right_trigger;
+        double axial   =  this.gamepadEx.getLeftY();
+        double lateral =  this.gamepadEx.getLeftX();
+        double yaw     =  this.gamepadEx.getRightX();
 
 
-        float shooter = gamepadEx.gamepad.left_stick_x;
+        double frontLeftPower  = axial + lateral + yaw;
+        double frontRightPower = axial - lateral - yaw;
+        double backLeftPower   = axial - lateral + yaw;
+        double backRightPower  = axial + lateral - yaw;
 
+        double max;
+        max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
+        max = Math.max(max, Math.abs(backLeftPower));
+        max = Math.max(max, Math.abs(backRightPower));
 
-        frontLeft.setPower(-0.75 * signedSquare(rotation + strafing + movement));
-        frontRight.setPower(-0.75 * signedSquare(rotation - strafing - movement));
-        backLeft.setPower(-0.75 * signedSquare(rotation - strafing + movement));
-        backRight.setPower(-0.75 * signedSquare(rotation + strafing - movement));
+        if (max > 1.0) {
+            frontLeftPower  /= max;
+            frontRightPower /= max;
+            backLeftPower   /= max;
+            backRightPower  /= max;
+        }
 
-
+        frontLeft.setPower(frontLeftPower);
+        frontRight.setPower(frontRightPower);
+        backLeft.setPower(backLeftPower);
+        backRight.setPower(backRightPower);
 
     }
 

@@ -30,25 +30,15 @@ public class ShootFinshCommand extends CommandBase {
     @Override
     public void initialize() {
         isFinished =false;
-        m_subsystem.kicker.setPosition(85/300.0);
         m_timer.reset();
 
-//        m_telemetry.addLine("IN");
-//        m_subsystem.shooter.setVelocity(1200);
-//        m_telemetry.update();
-    }
+  }
     @Override
     public void execute() {
-        if (m_timer.seconds() > 1.0) {
-            m_subsystem.kicker.setPosition(0);
-            m_subsystem.shooter.setPower(0);
-            m_subsystem.door.setPosition(1);
+        if (m_timer.seconds() > 0.6) {
             isFinished=true;
         }
     }
-
-
-
 
     @Override
     public boolean isFinished() {
