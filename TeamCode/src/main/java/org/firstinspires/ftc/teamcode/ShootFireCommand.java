@@ -5,21 +5,15 @@ import com.seattlesolvers.solverslib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class ShootFinshCommand extends CommandBase {
+public class ShootFireCommand extends CommandBase {
 
     ShooterSubsystem m_subsystem;
     Telemetry m_telemetry;
     boolean isFinished =false;
 
     ElapsedTime m_timer = new ElapsedTime();
-   // GamepadEx driverOp = new GamepadEx(gamepad1);
-    //GamepadEx toolOp = new GamepadEx(gamepad2);
 
-
-
-
-
-    public ShootFinshCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
+    public ShootFireCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
         m_subsystem = subsystem;
         m_telemetry = telemetry;
         // Use addRequirements() here to declare subsystem dependencies.
@@ -30,13 +24,21 @@ public class ShootFinshCommand extends CommandBase {
     @Override
     public void initialize() {
         isFinished =false;
+        m_subsystem.door.setPosition(84/300.0);
         m_timer.reset();
 
-  }
+//        m_telemetry.addLine("IN");
+//        m_subsystem.shooter.setVelocity(1200);
+//        m_telemetry.update();
+    }
     @Override
     public void execute() {
-        if (m_timer.seconds() > 0.4) {
+        if (m_timer.seconds() > .2) {
+            m_subsystem.kicker.setPosition(90/300.0);
+        }
+        if (m_timer.seconds() > 0.6) {
             isFinished=true;
+            m_subsystem.kicker.setPosition(0);
         }
     }
 
