@@ -16,7 +16,7 @@ import java.util.List;
 public class Location {
     GoBildaPinpointDriver pinpoint;
     SparkFunOTOS optical;
-    CameraCode apriltag;
+    // CameraCode apriltag;
     Telemetry display;
     ElapsedTime time;
     private Pose2D estimate;
@@ -24,7 +24,7 @@ public class Location {
         this.pinpoint = pinpoint;
         this.time = new ElapsedTime();
         this.optical = optical;
-        apriltag = new CameraCode(camera);
+        // apriltag = new CameraCode(camera);
         this.display = display;
 
         configureOptical();
@@ -38,33 +38,33 @@ public class Location {
     public void update() {
         estimate = getOptical();
 
-        List<AprilTagDetection> detections = apriltag.getCamera();
-        if (detections != null) {
-            for (AprilTagDetection detection : detections) {
-                if (detection.metadata != null) {
-                    // Only use tags that don't have Obelisk in them
-                    if (!detection.metadata.name.contains("Obelisk")) {
-                        double t = (detection.frameAcquisitionNanoTime / 1000000000.0);
-                        int id = detection.id;
-                        double system = (this.time.startTime() + time.time());
-                        display.addLine("tag: " + id + " time: " + t + " tag delay: " + (system - t));
-                        if (system - t <= 0.05 && system >= t) {
-                            double x = detection.robotPose.getPosition().x;
-                            double y = detection.robotPose.getPosition().y;
-                            double h = detection.robotPose.getOrientation().getYaw(AngleUnit.DEGREES);
-                            // detection.decisionMargin;
-
-                            // update
-                            double betterX = (estimate.getX(DistanceUnit.INCH) * 1 + x * 1) / 2;
-                            double betterY = (estimate.getY(DistanceUnit.INCH) * 1 + y * 1) / 2;
-                            double betterH = (estimate.getHeading(AngleUnit.DEGREES) * 1 + h * 1) / 2;
-                            estimate = new Pose2D(DistanceUnit.INCH, betterX, betterY, AngleUnit.DEGREES, betterH);
-                            SetPoseOptical(estimate);
-                        }
-                    }
-                }
-            }
-        }
+//        List<AprilTagDetection> detections = apriltag.getCamera();
+//        if (detections != null) {
+//            for (AprilTagDetection detection : detections) {
+//                if (detection.metadata != null) {
+//                    // Only use tags that don't have Obelisk in them
+//                    if (!detection.metadata.name.contains("Obelisk")) {
+//                        double t = (detection.frameAcquisitionNanoTime / 1000000000.0);
+//                        int id = detection.id;
+//                        double system = (this.time.startTime() + time.time());
+//                        display.addLine("tag: " + id + " time: " + t + " tag delay: " + (system - t));
+//                        if (system - t <= 0.05 && system >= t) {
+//                            double x = detection.robotPose.getPosition().x;
+//                            double y = detection.robotPose.getPosition().y;
+//                            double h = detection.robotPose.getOrientation().getYaw(AngleUnit.DEGREES);
+//                            // detection.decisionMargin;
+//
+//                            // update
+//                            double betterX = (estimate.getX(DistanceUnit.INCH) * 1 + x * 1) / 2;
+//                            double betterY = (estimate.getY(DistanceUnit.INCH) * 1 + y * 1) / 2;
+//                            double betterH = (estimate.getHeading(AngleUnit.DEGREES) * 1 + h * 1) / 2;
+//                            estimate = new Pose2D(DistanceUnit.INCH, betterX, betterY, AngleUnit.DEGREES, betterH);
+//                            SetPoseOptical(estimate);
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
 
