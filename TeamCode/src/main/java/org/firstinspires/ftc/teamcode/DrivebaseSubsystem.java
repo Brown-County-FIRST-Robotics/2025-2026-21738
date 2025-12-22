@@ -37,10 +37,10 @@ public  class DrivebaseSubsystem extends SubsystemBase {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        frontLeft = hMap.get(DcMotor.class, "frontLeft");
-        frontRight = hMap.get(DcMotor.class, "frontRight");
-        backLeft = hMap.get(DcMotor.class, "backLeft");
-        backRight = hMap.get(DcMotor.class, "backRight");
+        frontLeft = hMap.get(DcMotor.class, "frontLeftDrive");
+        frontRight = hMap.get(DcMotor.class, "frontRightDrive");
+        backLeft = hMap.get(DcMotor.class, "backLeftDrive");
+        backRight = hMap.get(DcMotor.class, "backRightDrive");
 
 
 
