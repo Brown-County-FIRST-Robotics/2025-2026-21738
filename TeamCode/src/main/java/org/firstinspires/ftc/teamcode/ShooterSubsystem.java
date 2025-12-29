@@ -27,11 +27,16 @@ public  class ShooterSubsystem extends SubsystemBase {
     Servo kicker = null;
     Servo flap = null;
     Servo door = null;
+
     GamepadEx gamepadEx;
+
+    double shooterSetSpeed;
+
 
 
     public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
         this.gamepadEx = gamepadEx;
+
 
 
 
@@ -59,6 +64,8 @@ public  class ShooterSubsystem extends SubsystemBase {
         this.kicker.setPosition(0);
         this.shooter.setVelocity(0);
 
+
+
     }
 
     /*
@@ -79,13 +86,48 @@ public  class ShooterSubsystem extends SubsystemBase {
 
 
 
+
         double swallow = gamepadEx.gamepad.right_trigger;
+        double out = gamepadEx.gamepad.left_trigger;
+        boolean Up = gamepadEx.gamepad.dpad_up;
+        boolean Down = gamepadEx.gamepad.dpad_down;
+        boolean Left = gamepadEx.gamepad.dpad_left;
+        boolean Right = gamepadEx.gamepad.dpad_right;
+
+
 
 
         float shooter = gamepadEx.gamepad.left_stick_x;
 
 
-        intake.setPower(-0.75 * signedSquare(swallow));
+        if(Up){
+            flap.setPosition(1);
+            shooterSetSpeed=16500;
+
+
+        }
+
+        if(Down){
+            flap.setPosition(1);
+            shooterSetSpeed=1200;
+
+
+        }
+
+       /* if(Left){
+            flap.setPosition(0);
+            shooterSetSpeed=1600;
+
+        }
+
+        if(Right){
+            flap.setPosition(1);
+            shooterSetSpeed=1200;
+
+        }*/
+
+        intake.setPower(-1 * signedSquare(swallow));
+        intake.setPower(1 * signedSquare(out));
 
 
 

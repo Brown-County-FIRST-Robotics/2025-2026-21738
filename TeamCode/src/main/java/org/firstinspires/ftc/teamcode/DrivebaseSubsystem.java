@@ -25,6 +25,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
+    Servo door = null;
     GamepadEx gamepadEx;
 
 
@@ -99,6 +100,8 @@ public  class DrivebaseSubsystem extends SubsystemBase {
         frontRight.setPower(frontRightPower);
         backLeft.setPower(backLeftPower);
         backRight.setPower(backRightPower);
+
+
 
     }
 
