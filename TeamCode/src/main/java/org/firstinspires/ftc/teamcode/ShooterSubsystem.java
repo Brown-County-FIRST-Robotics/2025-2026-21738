@@ -21,7 +21,7 @@ public  class ShooterSubsystem extends SubsystemBase {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
 
-    private DcMotor intake = null;
+    public DcMotor intake = null;
     DcMotorEx shooter = null;
 
     Servo kicker = null;

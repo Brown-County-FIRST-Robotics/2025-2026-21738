@@ -29,7 +29,7 @@ public class MainTeleopOpMode extends CommandOpMode {
 
         );
         // exampleButton.whenPressed(new Test(s, telemetry));
-        shooterButton.whileHeld(new SequentialCommandGroup(new ShootPowerUpCommand(s, telemetry), new ShootFireCommand(s, telemetry), new ShootFinshCommand(s, telemetry));
+        shooterButton.whileHeld(new SequentialCommandGroup(new ShootPowerUpCommand(s, telemetry), new ShootFireCommand(s, telemetry), new ShootFinshCommand(s, telemetry)));
         shooterButton.whenReleased(new ShootPowerOffCommand(s, telemetry));
         //   exampleButton.whenPressed(new ServoFlap(s, telemetry));
     }
