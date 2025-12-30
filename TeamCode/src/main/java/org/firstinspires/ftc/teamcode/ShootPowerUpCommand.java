@@ -8,7 +8,6 @@ public class ShootPowerUpCommand extends CommandBase {
 
     ShooterSubsystem m_subsystem;
     Telemetry m_telemetry;
-    ShooterSpeed M_shooterSpeed;
     boolean isFinished =false;
    // GamepadEx driverOp = new GamepadEx(gamepad1);
     //GamepadEx toolOp = new GamepadEx(gamepad2);
@@ -16,11 +15,9 @@ public class ShootPowerUpCommand extends CommandBase {
 
 
 
-
-    public ShootPowerUpCommand(ShooterSubsystem subsystem, Telemetry telemetry, ShooterSpeed shooterSpeed ) {
+    public ShootPowerUpCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
         m_subsystem = subsystem;
         m_telemetry = telemetry;
-        M_shooterSpeed = shooterSpeed;
 
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
@@ -35,7 +32,7 @@ public class ShootPowerUpCommand extends CommandBase {
     }
     @Override
     public void execute() {
-        if (m_subsystem.shooter.getVelocity() > m_subsystem.shooterSetSpeed) {
+        if (m_subsystem.shooter.getVelocity() >= m_subsystem.shooterSetSpeed) {
          //   m_subsystem.kicker.setPosition(85/300.0);
 
 //            m_subsystem.shooter.setPower(0);
