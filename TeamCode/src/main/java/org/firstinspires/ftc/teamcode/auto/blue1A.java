@@ -58,7 +58,7 @@ public class blue1A extends CommandOpMode {
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 45.6, AngleUnit.DEGREES, 180), 1, red), // slow down for better accuracy
                 new intakeCommand(s, -1),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 19, 45.6, AngleUnit.DEGREES, 180), 0.35, red),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 45.6, AngleUnit.DEGREES, 135), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 45.6, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 works
                 new intakeCommand(s, 0),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 120, AngleUnit.DEGREES, 160), 1, red),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 31.6, 128.3, AngleUnit.DEGREES, 147), 1, red),
