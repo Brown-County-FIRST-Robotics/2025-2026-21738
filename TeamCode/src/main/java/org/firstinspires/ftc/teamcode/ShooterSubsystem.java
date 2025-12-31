@@ -101,14 +101,14 @@ public  class ShooterSubsystem extends SubsystemBase {
 
 
         if(Up){
-            flap.setPosition(1);
+            flap.setPosition(135.0/300);
             shooterSetSpeed=2000;
 
 
         }
 
         if(Down){
-            flap.setPosition(1);
+            flap.setPosition(0);
             shooterSetSpeed=1200;
 
 
