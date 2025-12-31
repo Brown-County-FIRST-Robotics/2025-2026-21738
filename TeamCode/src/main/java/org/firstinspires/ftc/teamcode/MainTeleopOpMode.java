@@ -36,7 +36,8 @@ public class MainTeleopOpMode extends CommandOpMode {
 
         double speed;
         // exampleButton.whenPressed(new Test(s, telemetry));
-        shooterButton.whileHeld(new SequentialCommandGroup(new ShootPowerUpCommand(s, telemetry), new ShootFireCommand(s, telemetry), new ShootFinshCommand(s, telemetry)));
+        // shooterButton.whileHeld(new SequentialCommandGroup(new ShootPowerUpCommand(s, telemetry), new ShootFireCommand(s, telemetry), new ShootFinshCommand(s, telemetry)));
+        shooterButton.whileHeld(new launchCommand(s));
         shooterButton.whenReleased(new ShootPowerOffCommand(s, telemetry));
 
         //   exampleButton.whenPressed(new ServoFlap(s, telemetry));

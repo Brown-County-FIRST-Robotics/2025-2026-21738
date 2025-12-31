@@ -25,18 +25,18 @@ public  class ShooterSubsystem extends SubsystemBase {
     DcMotorEx shooter = null;
 
     Servo kicker = null;
-    Servo flap = null;
+    public Servo flap = null;
     Servo door = null;
-
+    public boolean teleop;
     GamepadEx gamepadEx;
 
-    double shooterSetSpeed;
+    public double shooterSetSpeed;
 
-
+    public double intakePower;
 
     public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
         this.gamepadEx = gamepadEx;
-
+        teleop = true;
 
 
 
@@ -102,7 +102,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         if(Up){
             flap.setPosition(1);
-            shooterSetSpeed=16500;
+            shooterSetSpeed=2000;
 
 
         }
@@ -125,12 +125,10 @@ public  class ShooterSubsystem extends SubsystemBase {
             shooterSetSpeed=1200;
 
         }*/
-
-        intake.setPower(-1 * signedSquare(swallow));
-        intake.setPower(1 * signedSquare(out));
-
-
-
+        if (teleop) {
+            intakePower = -1 * signedSquare(swallow) + 1 * signedSquare(out);;
+        }
+        intake.setPower(intakePower);
     }
 
 

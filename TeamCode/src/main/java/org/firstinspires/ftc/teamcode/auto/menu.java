@@ -3,8 +3,10 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.telemetry.SelectableOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @Configurable
+@Disabled
 @Autonomous(name = "Auto Menu", group = "Pedro Pathing")
 public class menu extends SelectableOpMode {
     public menu() {

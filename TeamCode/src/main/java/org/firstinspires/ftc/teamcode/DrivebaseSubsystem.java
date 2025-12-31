@@ -21,17 +21,18 @@ public  class DrivebaseSubsystem extends SubsystemBase {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
 
-    private DcMotor frontLeft = null;
-    private DcMotor frontRight = null;
-    private DcMotor backLeft = null;
-    private DcMotor backRight = null;
+    public DcMotor frontLeft = null;
+    public DcMotor frontRight = null;
+    public DcMotor backLeft = null;
+    public DcMotor backRight = null;
     Servo door = null;
     GamepadEx gamepadEx;
+    public boolean teleop;
 
 
     public DrivebaseSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
         this.gamepadEx = gamepadEx;
-
+        teleop = true;
 
 
 
@@ -95,12 +96,12 @@ public  class DrivebaseSubsystem extends SubsystemBase {
             backLeftPower   /= max;
             backRightPower  /= max;
         }
-
-        frontLeft.setPower(frontLeftPower);
-        frontRight.setPower(frontRightPower);
-        backLeft.setPower(backLeftPower);
-        backRight.setPower(backRightPower);
-
+        if (teleop) {
+            frontLeft.setPower(frontLeftPower);
+            frontRight.setPower(frontRightPower);
+            backLeft.setPower(backLeftPower);
+            backRight.setPower(backRightPower);
+        }
 
 
     }

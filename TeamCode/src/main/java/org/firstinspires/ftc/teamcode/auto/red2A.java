@@ -21,7 +21,7 @@ public class red2A extends CommandOpMode {
     public void initialize() {
         follower = Constants.createFollower(hardwareMap);
         follower.update();
-        follower.setStartingPose(new Pose(60.3, 12.1, Math.toRadians(110)));
+        follower.setStartingPose(new Pose(144 - 60.3, 12.1, Math.toRadians(180 - 110)));
         follower.update();
         // real path here
         SequentialCommandGroup path = new SequentialCommandGroup(

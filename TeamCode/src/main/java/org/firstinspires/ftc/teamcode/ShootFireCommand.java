@@ -34,9 +34,9 @@ public class ShootFireCommand extends CommandBase {
     @Override
     public void execute() {
         if (m_timer.seconds() > .2) {
-            m_subsystem.kicker.setPosition(90/300.0);
+            m_subsystem.kicker.setPosition(100/300.0);
         }
-        if (m_timer.seconds() > 0.6) {
+        if (m_timer.seconds() > 0.8) {
             isFinished=true;
             m_subsystem.kicker.setPosition(0);
         }

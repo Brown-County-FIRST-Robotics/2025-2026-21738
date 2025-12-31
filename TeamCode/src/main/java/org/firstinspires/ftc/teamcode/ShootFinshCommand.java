@@ -35,7 +35,7 @@ public class ShootFinshCommand extends CommandBase {
   }
     @Override
     public void execute() {
-        if (m_timer.seconds() > 0.4) {
+        if (m_timer.seconds() > 0.6) {
             isFinished=true;
         }
     }
