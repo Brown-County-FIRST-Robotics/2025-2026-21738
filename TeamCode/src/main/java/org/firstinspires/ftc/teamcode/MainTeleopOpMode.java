@@ -30,9 +30,6 @@ public class MainTeleopOpMode extends CommandOpMode {
         d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         Button shooterButton = new GamepadButton(
                 gamepadEx2, GamepadKeys.Button.A
-
-
-
         );
 
         double speed;
@@ -41,6 +38,10 @@ public class MainTeleopOpMode extends CommandOpMode {
         shooterButton.whileHeld(new launchCommand(s));
         shooterButton.whenReleased(new ShootPowerOffCommand(s, telemetry));
 
+        Button shakeButton = new GamepadButton(
+                gamepadEx2, GamepadKeys.Button.Y
+        );
+        shakeButton.whileHeld(new shake(d));
         //   exampleButton.whenPressed(new ServoFlap(s, telemetry));
     }
 
