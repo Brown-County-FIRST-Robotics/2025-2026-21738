@@ -28,7 +28,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
     GamepadEx gamepadEx2;
     ElapsedTime m_timer = new ElapsedTime();
     double Time = 0;
-    boolean shaker = gamepadEx.gamepad.y;
+
 
 
     public DrivebaseSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
@@ -105,46 +105,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
         backLeft.setPower(backLeftPower);
         backRight.setPower(backRightPower);
 
-        // When Y is pressed, start the sequence
-        if (shaker && Time == 0) {
-            m_timer.reset();
-            Time = 1;
-        }
 
-// Step 1: drive forward for 1 second
-        if (Time == 1) {
-            frontLeft.setPower(1);
-            frontRight.setPower(1);
-            backLeft.setPower(1);
-            backRight.setPower(1);
-
-            if (m_timer.seconds() >= .2) {
-                m_timer.reset();
-                Time = 2;
-            }
-        }
-
-// Step 2: drive backward for 1 second
-        else if (Time == 2) {
-            frontLeft.setPower(-1);
-            frontRight.setPower(-1);
-            backLeft.setPower(-1);
-            backRight.setPower(-1);
-
-            if (m_timer.seconds() >= .2) {
-                Time = 3;
-            }
-        }
-
-// Step 3: return to normal driving
-        else if (Time == 3) {
-            frontLeft.setPower(frontLeftPower);
-            frontRight.setPower(frontRightPower);
-            backLeft.setPower(backLeftPower);
-            backRight.setPower(backRightPower);
-
-            Time = 0;
-        }
 
 
 

@@ -41,6 +41,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
 
 
+
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -94,11 +95,22 @@ public  class ShooterSubsystem extends SubsystemBase {
         boolean Left = gamepadEx.gamepad.dpad_left;
         boolean Right = gamepadEx.gamepad.dpad_right;
         boolean Gate = gamepadEx.gamepad.x;
+        boolean Go = gamepadEx.gamepad.right_bumper;
+        boolean back = gamepadEx.gamepad.left_bumper;
 
 
 
 
         float shooter = gamepadEx.gamepad.left_stick_x;
+
+        if(Go){
+            kicker.setPosition(90/300.0);
+
+
+        }
+        if(back){
+            kicker.setPosition(0);
+        }
 
 
         if(Up){

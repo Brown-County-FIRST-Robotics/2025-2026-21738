@@ -27,8 +27,7 @@ public class MainTeleopOpMode extends CommandOpMode {
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         s = new ShooterSubsystem(gamepadEx2, hardwareMap);
         d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
-        Button moveUp = new GamepadButton( gamepadEx2, GamepadKeys.Button.DPAD_UP);
-        Button moveDown = new GamepadButton( gamepadEx2, GamepadKeys.Button.DPAD_DOWN);
+       // sk = new ShakerSubsystem(gamepadEx2, hardwareMap);
         Button shooterButton = new GamepadButton(
                 gamepadEx2, GamepadKeys.Button.A
         );
