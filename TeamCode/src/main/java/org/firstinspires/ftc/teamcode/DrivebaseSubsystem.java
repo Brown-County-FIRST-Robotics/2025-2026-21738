@@ -29,12 +29,13 @@ public  class DrivebaseSubsystem extends SubsystemBase {
     GamepadEx gamepadEx2;
     ElapsedTime m_timer = new ElapsedTime();
     double Time = 0;
-    boolean shaker = gamepadEx.gamepad.y;
+    boolean shaker;
 
 
     public DrivebaseSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
         this.gamepadEx = gamepadEx;
         teleop = true;
+        shaker = gamepadEx.gamepad.y;
 
 
 
