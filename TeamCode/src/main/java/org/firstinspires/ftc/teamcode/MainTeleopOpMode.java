@@ -31,10 +31,8 @@ public class MainTeleopOpMode extends CommandOpMode {
         Button moveDown = new GamepadButton( gamepadEx2, GamepadKeys.Button.DPAD_DOWN);
         Button shooterButton = new GamepadButton(
                 gamepadEx2, GamepadKeys.Button.A
-
-
-
         );
+
 
         double speed;
         // exampleButton.whenPressed(new Test(s, telemetry));
