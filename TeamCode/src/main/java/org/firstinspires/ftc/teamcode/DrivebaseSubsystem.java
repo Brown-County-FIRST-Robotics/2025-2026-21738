@@ -2,10 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
@@ -28,6 +25,11 @@ public  class DrivebaseSubsystem extends SubsystemBase {
     Servo door = null;
     GamepadEx gamepadEx;
     public boolean teleop;
+
+    GamepadEx gamepadEx2;
+    ElapsedTime m_timer = new ElapsedTime();
+    double Time = 0;
+    boolean shaker = gamepadEx.gamepad.y;
 
 
     public DrivebaseSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
@@ -75,6 +77,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
 
 
 
+
         double axial   =  this.gamepadEx.getLeftY();
         double lateral =  this.gamepadEx.getLeftX();
         double yaw     =  this.gamepadEx.getRightX();
@@ -95,7 +98,9 @@ public  class DrivebaseSubsystem extends SubsystemBase {
             frontRightPower /= max;
             backLeftPower   /= max;
             backRightPower  /= max;
+
         }
+
         if (teleop) {
             frontLeft.setPower(frontLeftPower);
             frontRight.setPower(frontRightPower);

@@ -93,6 +93,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         boolean Down = gamepadEx.gamepad.dpad_down;
         boolean Left = gamepadEx.gamepad.dpad_left;
         boolean Right = gamepadEx.gamepad.dpad_right;
+        boolean Gate = gamepadEx.gamepad.x;
 
 
 
@@ -102,7 +103,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         if(Up){
             flap.setPosition(135.0/300);
-            shooterSetSpeed=2000;
+            shooterSetSpeed=1650;
 
 
         }
@@ -112,6 +113,9 @@ public  class ShooterSubsystem extends SubsystemBase {
             shooterSetSpeed=1200;
 
 
+        }
+        if(Gate){
+            door.setPosition(84/300.0);
         }
 
        /* if(Left){

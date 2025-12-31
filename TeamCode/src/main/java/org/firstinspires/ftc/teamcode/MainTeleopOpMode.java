@@ -32,6 +32,7 @@ public class MainTeleopOpMode extends CommandOpMode {
                 gamepadEx2, GamepadKeys.Button.A
         );
 
+
         double speed;
         // exampleButton.whenPressed(new Test(s, telemetry));
         // shooterButton.whileHeld(new SequentialCommandGroup(new ShootPowerUpCommand(s, telemetry), new ShootFireCommand(s, telemetry), new ShootFinshCommand(s, telemetry)));
