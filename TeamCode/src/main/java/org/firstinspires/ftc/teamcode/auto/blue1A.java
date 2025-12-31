@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-
+//  ./gradlew reloadFastLoad run this command
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
