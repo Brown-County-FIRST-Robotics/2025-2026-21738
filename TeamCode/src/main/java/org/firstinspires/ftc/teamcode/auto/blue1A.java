@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="1A Blue, D")
+@Autonomous(name="1A Blue, D VI")
 public class blue1A extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -37,7 +37,7 @@ public class blue1A extends CommandOpMode {
         d.backLeft.setPower(0);
         d.backRight.setPower(0);
         follower.update();
-        follower.setStartingPose(new Pose(27.6, 130.3, Math.toRadians(144))); //old h = 216
+        follower.setStartingPose(new Pose(27.6/1.17, 127.0/1.17, Math.toRadians(143))); //old h = 216
         follower.update();
         s.flap.setPosition(0);
         s.shooterSetSpeed = 1200;
@@ -54,11 +54,11 @@ public class blue1A extends CommandOpMode {
                 new shake(d),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 106, AngleUnit.DEGREES, -135), 1, red),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 45.6, AngleUnit.DEGREES, 180), 1, red), // slow down for better accuracy
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 106, AngleUnit.DEGREES, -135), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 35.5, AngleUnit.DEGREES, 180), 1, red), // slow down for better accuracy
                 new intakeCommand(s, -1),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 19, 45.6, AngleUnit.DEGREES, 180), 0.35, red),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 45.6, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 works
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 19, 35.5, AngleUnit.DEGREES, 180), 0.35, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 35.5, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 works
                 new intakeCommand(s, 0),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 120, AngleUnit.DEGREES, 160), 1, red),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 31.6, 128.3, AngleUnit.DEGREES, 147), 1, red),

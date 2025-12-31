@@ -99,8 +99,8 @@ public class Constants {
 
     public static OTOSConstants localizerConstants = new OTOSConstants()
             .hardwareMapName("sensor_otos")
-            .linearScalar(1.3)
-            .angularScalar(0.99)
+            .linearScalar(1.0) // was 1.3
+            .angularScalar(1) // was 0.99
             .linearUnit(DistanceUnit.INCH)
             .angleUnit(AngleUnit.RADIANS);
 

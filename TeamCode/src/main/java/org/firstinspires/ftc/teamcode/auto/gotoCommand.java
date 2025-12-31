@@ -21,9 +21,10 @@ public class gotoCommand extends CommandBase {
 
     PathChain path;
     public gotoCommand(Follower controller, Pose2D location, double maxPower, boolean isRed) {
+        double scale = 1.0/1.17;
+        location = new Pose2D(DistanceUnit.INCH, scale * location.getX(DistanceUnit.INCH), scale * location.getY(DistanceUnit.INCH), AngleUnit.DEGREES, location.getHeading(AngleUnit.DEGREES));
         if (isRed) {
             pose = new Pose(144 - location.getX(DistanceUnit.INCH), location.getY(DistanceUnit.INCH), Math.toRadians(180 - location.getHeading(AngleUnit.DEGREES)));
-
         }else {
             pose = new Pose(location.getX(DistanceUnit.INCH), location.getY(DistanceUnit.INCH), location.getHeading(AngleUnit.RADIANS));
         }
