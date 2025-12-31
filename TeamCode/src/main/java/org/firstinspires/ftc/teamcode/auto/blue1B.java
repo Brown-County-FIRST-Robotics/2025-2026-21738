@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 
-@Autonomous(name="1B Blue, D")
+@Autonomous(name="1B Blue")
 public class blue1B extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -21,7 +21,7 @@ public class blue1B extends CommandOpMode {
     public void initialize() {
         follower = Constants.createFollower(hardwareMap);
         follower.update();
-        follower.setStartingPose(new Pose(27.6, 130.3, Math.toRadians(144)));
+        follower.setStartingPose(gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
         follower.update();
         // real path here
         SequentialCommandGroup path = new SequentialCommandGroup(

@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="1A Blue, D VI")
+@Autonomous(name="1A Blue")
 public class blue1A extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -37,10 +37,10 @@ public class blue1A extends CommandOpMode {
         d.backLeft.setPower(0);
         d.backRight.setPower(0);
         follower.update();
-        follower.setStartingPose(new Pose(27.6/1.17, 127.0/1.17, Math.toRadians(143))); //old h = 216
+        follower.setStartingPose(gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
         follower.update();
         s.flap.setPosition(0);
-        s.shooterSetSpeed = 1200;
+        s.shooterSetSpeed = 1170;
         s.teleop = false;
         d.teleop = false;
         // real path here
@@ -60,17 +60,16 @@ public class blue1A extends CommandOpMode {
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 19, 35.5, AngleUnit.DEGREES, 180), 0.35, red),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 35.5, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 works
                 new intakeCommand(s, 0),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 120, AngleUnit.DEGREES, 160), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 110, AngleUnit.DEGREES, 160), 1, red),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 31.6, 128.3, AngleUnit.DEGREES, 147), 1, red),
-                new shake(d),
+                new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
-                new shake(d),
-                new launchCommand(s),
-                new ShootPowerOffCommand(s, telemetry)
+                new ShootPowerOffCommand(s, telemetry),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 49.6, 128.3, AngleUnit.DEGREES, 147), 1, red)
         );
         path.schedule();
     }
