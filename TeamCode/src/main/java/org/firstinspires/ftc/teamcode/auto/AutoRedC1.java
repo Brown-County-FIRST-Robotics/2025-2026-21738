@@ -58,11 +58,11 @@ public class AutoRedC1 extends CommandOpMode {
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 106, AngleUnit.DEGREES, -135), 1, red),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 84, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 84, AngleUnit.DEGREES, 180), 0.35, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 84, AngleUnit.DEGREES, 180), 0.35, red), // x was 23
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 84, AngleUnit.DEGREES, 135), 1, red),
                 new intakeCommand(s, 0),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 110, AngleUnit.DEGREES, 160), 1, red),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23.5, 121.3, AngleUnit.DEGREES, 147), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 31.6, 120.3, AngleUnit.DEGREES, 147), 1, red), // new x is 3 more then normal
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
