@@ -27,6 +27,7 @@ public class AutoDrive extends CommandOpMode {
     public void initialize() {
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
+        d.teleop = false;
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
         d.backLeft.setPower(0);
@@ -36,14 +37,5 @@ public class AutoDrive extends CommandOpMode {
         d.frontRight.setPower(0.5);
         d.backLeft.setPower(0.5);
         d.backRight.setPower(0.5);
-    }
-
-    @Override
-    public void end() {
-        super.end();
-        d.frontLeft.setPower(0);
-        d.frontRight.setPower(0);
-        d.backLeft.setPower(0);
-        d.backRight.setPower(0);
     }
 }

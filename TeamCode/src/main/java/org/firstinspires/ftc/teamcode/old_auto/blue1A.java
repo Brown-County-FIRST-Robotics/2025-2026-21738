@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.old_auto;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
@@ -22,6 +23,7 @@ import org.firstinspires.ftc.teamcode.shake;
 
 
 @Autonomous(name="1A Blue")
+@Disabled
 public class blue1A extends CommandOpMode {
     Follower follower;
     boolean red = false;

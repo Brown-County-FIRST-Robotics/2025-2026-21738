@@ -28,40 +28,25 @@ public class AutoDriveShoot extends CommandOpMode {
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         ShooterSubsystem s = new ShooterSubsystem(gamepadEx, hardwareMap);
+        d.teleop = false;
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
         d.backLeft.setPower(0);
         d.backRight.setPower(0);
         s.flap.setPosition(250.0/300);
+        s.shooterSetSpeed = 1650;
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new shake(d),
-                new shake(d),
+                new launchCommand(s),
+                new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
-                new shake(d),
                 new launchCommand(s),
-                new shake(d),
-                new shake(d),
-                new launchCommand(s),
-                new shake(d),
-                new shake(d),
-                new launchCommand(s),
-                new shake(d),
                 new shake(d),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
                 new driveCommand(d, 0.5)
         );
         path.schedule();
-    }
-
-    @Override
-    public void end() {
-        super.end();
-        d.frontLeft.setPower(0);
-        d.frontRight.setPower(0);
-        d.backLeft.setPower(0);
-        d.backRight.setPower(0);
     }
 }
