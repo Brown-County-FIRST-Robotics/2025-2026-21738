@@ -1,9 +1,10 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.old_auto;
 
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 
@@ -13,15 +14,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 
-@Autonomous(name="2B Red, D")
-public class red2B extends CommandOpMode {
+@Autonomous(name="2B Blue, D")
+@Disabled
+public class blue2B extends CommandOpMode {
     Follower follower;
-    boolean red = true;
+    boolean red = false;
     @Override
     public void initialize() {
         follower = Constants.createFollower(hardwareMap);
         follower.update();
-        follower.setStartingPose(new Pose(144 - 60.3, 12.1, Math.toRadians(180 - 110)));
+        follower.setStartingPose(new Pose(60.3, 12.1, Math.toRadians(110)));
         follower.update();
         // real path here
         SequentialCommandGroup path = new SequentialCommandGroup(

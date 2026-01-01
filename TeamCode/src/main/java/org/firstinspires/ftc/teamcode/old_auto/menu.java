@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.old_auto;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.telemetry.SelectableOpMode;

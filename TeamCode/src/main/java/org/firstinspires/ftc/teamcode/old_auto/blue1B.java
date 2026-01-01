@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.old_auto;
 
 
 import com.pedropathing.follower.Follower;
@@ -10,24 +10,26 @@ import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+import org.firstinspires.ftc.teamcode.auto.gotoCommand;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 
-@Autonomous(name="2B Blue, D")
-public class blue2B extends CommandOpMode {
+@Autonomous(name="1B Blue")
+public class blue1B extends CommandOpMode {
     Follower follower;
     boolean red = false;
     @Override
     public void initialize() {
         follower = Constants.createFollower(hardwareMap);
         follower.update();
-        follower.setStartingPose(new Pose(60.3, 12.1, Math.toRadians(110)));
+        follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
         follower.update();
         // real path here
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 44, 61, AngleUnit.DEGREES, 180), 0.70, red),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 25, 61, AngleUnit.DEGREES, 180), 0.70, red), // slow down for better accuracy
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 44, 61, AngleUnit.DEGREES, 180), 0.70, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 106, AngleUnit.DEGREES, -135), 0.70, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 60, AngleUnit.DEGREES, 180), 0.70, red), // slow down for better accuracy
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 24, 60, AngleUnit.DEGREES, 180), 0.70, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 60, AngleUnit.DEGREES, 135), 0.70, red),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 120, AngleUnit.DEGREES, 135), 0.70, red)
         );
         path.schedule();
