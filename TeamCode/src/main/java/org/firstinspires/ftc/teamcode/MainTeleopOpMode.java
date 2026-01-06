@@ -26,7 +26,9 @@ public class MainTeleopOpMode extends CommandOpMode {
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         s = new ShooterSubsystem(gamepadEx2, hardwareMap);
-        s.shooterSetSpeed = 1650;
+        //s.shooterSetSpeed = 1650;
+        s.flap.setPosition(0); // new
+        s.shooterSetSpeed=1200; // new
         d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         Button shooterButton = new GamepadButton(
                 gamepadEx2, GamepadKeys.Button.A

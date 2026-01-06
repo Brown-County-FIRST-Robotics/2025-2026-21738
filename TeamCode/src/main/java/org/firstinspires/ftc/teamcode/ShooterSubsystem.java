@@ -32,11 +32,14 @@ public  class ShooterSubsystem extends SubsystemBase {
 
     public double shooterSetSpeed;
 
+
     public double intakePower;
 
     public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
         this.gamepadEx = gamepadEx;
         teleop = true;
+
+        shooterSetSpeed = 1000;
 
 
 
@@ -62,7 +65,8 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         this.door.setPosition(0);
         this.kicker.setPosition(0);
-        this.shooter.setVelocity(0);
+        this.shooter.setVelocity(1000);
+
 
 
 
@@ -118,13 +122,12 @@ public  class ShooterSubsystem extends SubsystemBase {
             door.setPosition(84/300.0);
         }
 
-       /* if(Left){
-            flap.setPosition(0);
-            shooterSetSpeed=1600;
+        if(Left){
+            flap.setPosition(125.0/300);
 
         }
 
-        if(Right){
+       /* if(Right){
             flap.setPosition(1);
             shooterSetSpeed=1200;
 

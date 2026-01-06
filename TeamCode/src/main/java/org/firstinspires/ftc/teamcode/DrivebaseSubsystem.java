@@ -8,12 +8,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 /**
  * A gripper mechanism that grabs a stone from the quarry.
  * Centered around the Skystone game for FTC that was done in the 2019
  * to 2020 season.
  */
 public  class DrivebaseSubsystem extends SubsystemBase {
+
+    Telemetry m_telemetry;
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -36,6 +40,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
         this.gamepadEx = gamepadEx;
         teleop = true;
         shaker = gamepadEx.gamepad.y;
+
 
 
 
