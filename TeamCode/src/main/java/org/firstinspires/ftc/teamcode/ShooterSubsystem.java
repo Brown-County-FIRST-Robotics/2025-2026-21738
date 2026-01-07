@@ -98,6 +98,8 @@ public  class ShooterSubsystem extends SubsystemBase {
         boolean Left = gamepadEx.gamepad.dpad_left;
         boolean Right = gamepadEx.gamepad.dpad_right;
         boolean Gate = gamepadEx.gamepad.x;
+        boolean StopTheAnnoyingSound = gamepadEx.gamepad.left_bumper;
+        boolean OkFine = gamepadEx.gamepad.right_bumper;
 
 
 
@@ -131,7 +133,16 @@ public  class ShooterSubsystem extends SubsystemBase {
             flap.setPosition(1);
             shooterSetSpeed=1200;
 
+
+
         }*/
+
+        if(StopTheAnnoyingSound){
+            shooterSetSpeed=0;
+        }
+        if(OkFine){
+            shooterSetSpeed=1000;
+        }
         if (teleop) {
             intakePower = -1 * signedSquare(swallow) + 1 * signedSquare(out);;
         }
