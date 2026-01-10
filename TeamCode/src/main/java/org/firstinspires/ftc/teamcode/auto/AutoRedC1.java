@@ -46,11 +46,9 @@ public class AutoRedC1 extends CommandOpMode {
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 26.6, 121.3, AngleUnit.DEGREES, 147), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 27.6, 120.3, AngleUnit.DEGREES, 147), 1, red), // x +1 y -1
                 new launchCommand(s),
-                new shake(d),
                 new launchCommand(s),
-                new shake(d),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
