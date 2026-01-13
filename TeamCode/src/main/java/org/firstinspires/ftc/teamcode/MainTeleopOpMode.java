@@ -9,6 +9,8 @@ import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 import java.util.concurrent.Delayed;
 
 import kotlinx.coroutines.Delay;
@@ -25,7 +27,7 @@ public class MainTeleopOpMode extends CommandOpMode {
     public void initialize() {
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
-        s = new ShooterSubsystem(gamepadEx2, hardwareMap);
+        s = new ShooterSubsystem(gamepadEx2, hardwareMap, telemetry);
         //s.shooterSetSpeed = 1650;
         s.flap.setPosition(0); // new
         s.shooterSetSpeed=1200; // new

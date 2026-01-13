@@ -11,12 +11,16 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 /**
  * A gripper mechanism that grabs a stone from the quarry.
  * Centered around the Skystone game for FTC that was done in the 2019
  * to 2020 season.
  */
 public  class ShooterSubsystem extends SubsystemBase {
+
+    Telemetry m_telemetry;
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -35,10 +39,10 @@ public  class ShooterSubsystem extends SubsystemBase {
 
     public double intakePower;
 
-    public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
+    public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap, Telemetry telemetry) {
         this.gamepadEx = gamepadEx;
         teleop = true;
-
+        m_telemetry = telemetry;
         shooterSetSpeed = 1000;
 
 
@@ -100,7 +104,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         boolean Gate = gamepadEx.gamepad.x;
         boolean StopTheAnnoyingSound = gamepadEx.gamepad.left_bumper;
         boolean OkFine = gamepadEx.gamepad.right_bumper;
-
+        double Flap = flap.getPosition();
 
 
 
@@ -124,18 +128,33 @@ public  class ShooterSubsystem extends SubsystemBase {
             door.setPosition(84/300.0);
         }
 
-        if(Left){
-            flap.setPosition(125.0/300);
 
+        double flapPos = flap.getPosition();
+        double step = 5 / 300.0;
+
+        if (gamepadEx.gamepad.dpadLeftWasPressed()) {
+            flapPos =+ step;
         }
 
-       /* if(Right){
-            flap.setPosition(1);
-            shooterSetSpeed=1200;
+        if (gamepadEx.gamepad.dpadRightWasPressed()) {
+            flapPos =- step;
+        }
 
+        if (gamepadEx.gamepad.dpadRightWasReleased()) {
+            flap.setPosition(flapPos);
+        }
 
+        if (gamepadEx.gamepad.dpadRightWasReleased()) {
+            flap.setPosition(flapPos);
+        }
+        m_telemetry.addLine();
+        m_telemetry.addData("flap", flapPos);
+        m_telemetry.update();
 
-        }*/
+// Clamp between 0 and 1
+        flapPos = Math.max(0.0, Math.min(1.0, flapPos));
+
+        flap.setPosition(flapPos);
 
         if(StopTheAnnoyingSound){
             shooterSetSpeed=0;
