@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Blue A1 updated", group = "Autonomous")
-public class AutoBlueA1 extends CommandOpMode {
+@Autonomous(name="Blue A2 new", group="Autonomous")
+public class AutoBlueA2 extends CommandOpMode {
     Follower follower;
     boolean red = false;
     @Override
@@ -37,27 +37,26 @@ public class AutoBlueA1 extends CommandOpMode {
         d.backLeft.setPower(0);
         d.backRight.setPower(0);
         follower.update();
-        follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
+        follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(57, 9, Math.toRadians(90)), red));
         follower.update();
-        s.flap.setPosition(0);
-        s.shooterSetSpeed = 1170;
+        s.flap.setPosition(250.0/300);
+        s.shooterSetSpeed = 1650;
         s.teleop = false;
         d.teleop = false;
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 106, AngleUnit.DEGREES, 143), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 23, AngleUnit.DEGREES, 115), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 34, AngleUnit.DEGREES, 180), 1, red), // slow down for better accuracy
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 39, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 32, AngleUnit.DEGREES, 180), 0.2, red),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 32, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 work.
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 106, AngleUnit.DEGREES, 143), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 39, AngleUnit.DEGREES, 180), 0.2, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 58, 23, AngleUnit.DEGREES, 115), 0.8, red),
                 new intakeCommand(s, 0),
                 new launchCommand(s),
                 new launchCommand(s),
@@ -65,7 +64,7 @@ public class AutoBlueA1 extends CommandOpMode {
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 49.6, 126.3, AngleUnit.DEGREES, 147), 1, red)
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 37, 15, AngleUnit.DEGREES, 115), 1, red)
         );
         path.schedule();
     }
