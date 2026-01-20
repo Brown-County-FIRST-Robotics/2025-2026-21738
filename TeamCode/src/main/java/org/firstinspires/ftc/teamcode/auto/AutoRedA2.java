@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-
+//  ./gradlew reloadFastLoad run this command
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
@@ -14,58 +14,56 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.teamcode.DrivebaseSubsystem;
 import org.firstinspires.ftc.teamcode.ShootPowerOffCommand;
 import org.firstinspires.ftc.teamcode.ShooterSubsystem;
-import org.firstinspires.ftc.teamcode.auto.gotoCommand;
 import org.firstinspires.ftc.teamcode.intakeCommand;
 import org.firstinspires.ftc.teamcode.launchCommand;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Red C1", group = "Autonomous")
-public class AutoRedC1 extends CommandOpMode {
+@Autonomous(name="Red A2", group="Autonomous")
+public class AutoRedA2 extends CommandOpMode {
     Follower follower;
-    final boolean red = true;
+    boolean red = true;
     @Override
     public void initialize() {
         follower = Constants.createFollower(hardwareMap);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
-        ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap, telemetry);
+        ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
         d.backLeft.setPower(0);
         d.backRight.setPower(0);
         follower.update();
-        follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
+        follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(57, 9, Math.toRadians(90)), red));
         follower.update();
-        s.flap.setPosition(0);
-        s.shooterSetSpeed = 1170;
+        s.flap.setPosition(250.0/300);
+        s.shooterSetSpeed = 1650;
         s.teleop = false;
         d.teleop = false;
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 99, AngleUnit.DEGREES, 143), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 23, AngleUnit.DEGREES, 110), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 84, AngleUnit.DEGREES, 180), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 42, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 84, AngleUnit.DEGREES, 180), 0.2, red), // x was 23
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 84, AngleUnit.DEGREES, 135), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 41, AngleUnit.DEGREES, 180), 0.2, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 23, AngleUnit.DEGREES, 115), 1, red),
                 new intakeCommand(s, 0),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 99, AngleUnit.DEGREES, 143), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 49.6, 128.3, AngleUnit.DEGREES, 147), 1, red)
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 37, 15, AngleUnit.DEGREES, 110), 1, red)
         );
         path.schedule();
     }

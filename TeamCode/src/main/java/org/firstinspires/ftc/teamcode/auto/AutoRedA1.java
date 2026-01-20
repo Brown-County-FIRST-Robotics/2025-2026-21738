@@ -46,31 +46,26 @@ public class AutoRedA1 extends CommandOpMode {
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 26.6, 121.3, AngleUnit.DEGREES, 147), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 99, AngleUnit.DEGREES, 143), 1, red),
+                new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
-                new shake(d),
-                new launchCommand(s),
-                new shake(d),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 106, AngleUnit.DEGREES, -135), 1, red),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 35.5, AngleUnit.DEGREES, 180), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 54, 36, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 19, 35.5, AngleUnit.DEGREES, 180), 0.35, red),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 35.5, AngleUnit.DEGREES, 135), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 36, AngleUnit.DEGREES, 180), 0.3, red), // x was 23
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 54, 36, AngleUnit.DEGREES, 135), 1, red),
                 new intakeCommand(s, 0),
-/*              new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50.5, 110, AngleUnit.DEGREES, 160), 1, red),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 26.6, 121.3, AngleUnit.DEGREES, 147), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 99, AngleUnit.DEGREES, 143), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
-                new shake(d),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-*/              new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 49.6, 128.3, AngleUnit.DEGREES, 147), 1, red)
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 49.6, 128.3, AngleUnit.DEGREES, 147), 1, red)
         );
         path.schedule();
     }
