@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Red A1", group = "Autonomous")
+@Autonomous(name="Red A1 1/20/2026", group = "Autonomous")
 public class AutoRedA1 extends CommandOpMode {
     Follower follower;
     final boolean red = true;
@@ -53,10 +53,10 @@ public class AutoRedA1 extends CommandOpMode {
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 54, 36, AngleUnit.DEGREES, 180), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 55, 24, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 36, AngleUnit.DEGREES, 180), 0.3, red), // x was 23
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 54, 36, AngleUnit.DEGREES, 135), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 24, AngleUnit.DEGREES, 180), 0.3, red), // x was 23
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 55, 24, AngleUnit.DEGREES, 135), 1, red),
                 new intakeCommand(s, 0),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 99, AngleUnit.DEGREES, 143), 1, red),
                 new launchCommand(s),
