@@ -35,6 +35,7 @@ public  class ShooterSubsystem extends SubsystemBase {
     GamepadEx gamepadEx;
 
     public double shooterSetSpeed;
+    double deathCommand;
 
 
     public double intakePower;
@@ -44,6 +45,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         teleop = true;
         m_telemetry = telemetry;
         shooterSetSpeed = 1000;
+        deathCommand = 10;
 
 
 
@@ -132,26 +134,22 @@ public  class ShooterSubsystem extends SubsystemBase {
         double flapPos = flap.getPosition();
         double step = 5 / 300.0;
 
-        if (gamepadEx.gamepad.dpadLeftWasPressed()) {
-            flapPos =+ step;
-        }
-
-        if (gamepadEx.gamepad.dpadRightWasPressed()) {
-            flapPos =- step;
-        }
-
-        if (gamepadEx.gamepad.dpadRightWasReleased()) {
+        if (Left) {
+            flapPos += step;
             flap.setPosition(flapPos);
         }
 
-        if (gamepadEx.gamepad.dpadRightWasReleased()) {
+        if (Right) {
+            flapPos -= step;
             flap.setPosition(flapPos);
         }
+
+
         m_telemetry.addLine();
         m_telemetry.addData("flap", flapPos);
         m_telemetry.update();
 
-// Clamp between 0 and 1
+
         flapPos = Math.max(0.0, Math.min(1.0, flapPos));
 
         flap.setPosition(flapPos);

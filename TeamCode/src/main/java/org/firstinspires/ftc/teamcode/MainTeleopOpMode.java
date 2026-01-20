@@ -28,26 +28,23 @@ public class MainTeleopOpMode extends CommandOpMode {
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         s = new ShooterSubsystem(gamepadEx2, hardwareMap, telemetry);
-        //s.shooterSetSpeed = 1650;
-        s.flap.setPosition(0); // new
-        s.shooterSetSpeed=1200; // new
+
+        s.flap.setPosition(0);
+        s.shooterSetSpeed=1200;
         d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         Button shooterButton = new GamepadButton(
-                gamepadEx2, GamepadKeys.Button.A
-        );
+                gamepadEx2, GamepadKeys.Button.A);
 
 
         double speed;
-        // exampleButton.whenPressed(new Test(s, telemetry));
-        // shooterButton.whileHeld(new SequentialCommandGroup(new ShootPowerUpCommand(s, telemetry), new ShootFireCommand(s, telemetry), new ShootFinshCommand(s, telemetry)));
+
         shooterButton.whileHeld(new launchCommand(s));
         shooterButton.whenReleased(new ShootPowerOffCommand(s, telemetry));
 
         Button shakeButton = new GamepadButton(
-                gamepadEx2, GamepadKeys.Button.Y
-        );
+                gamepadEx2, GamepadKeys.Button.Y);
         shakeButton.whileHeld(new shake(d));
-        //   exampleButton.whenPressed(new ServoFlap(s, telemetry));
+
     }
 
 }
