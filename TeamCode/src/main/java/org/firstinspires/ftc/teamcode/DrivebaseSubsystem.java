@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -65,6 +66,12 @@ public  class DrivebaseSubsystem extends SubsystemBase {
         double axial   =  this.gamepadEx.getLeftY();
         double lateral =  this.gamepadEx.getLeftX();
         double yaw     =  this.gamepadEx.getRightX();
+        boolean TheFitnessGramPacerTestIsAMultistageAerobicCapacityTestThatProgressivelyGetsMoreDifficultAsItContinuesThe20MeterPacerTestWillBeginIn30SecondsLineUpAtTheStartTheRunningSpeedStartsSlowlyButGetsFasterEachMinuteAfterYouHearThisSignalBeepASingleLapShouldBeCompletedEachTimeYouHearThisSoundDINGRememberToRunInAStraightLineAndRunAsLongAsPossibleTheSecondTimeYouFailCoCompleteALapBeforeTheSoundYourTestIsOverTheTestWillBeginOnTheWordStartOnYourMarkGetReadyStart = gamepadEx.gamepad.left_bumper;;
+        boolean OkTheFitnessGramPacerTestIsAMultistageAerobicCapacityTestThatProgressivelyGetsMoreDifficultAsItContinuesThe20MeterPacerTestWillBeginIn30SecondsLineUpAtTheStartTheRunningSpeedStartsSlowlyButGetsFasterEachMinuteAfterYouHearThisSignalBeepASingleLapShouldBeCompletedEachTimeYouHearThisSoundDINGRememberToRunInAStraightLineAndRunAsLongAsPossibleTheSecondTimeYouFailCoCompleteALapBeforeTheSoundYourTestIsOverTheTestWillBeginOnTheWordStartOnYourMarkGetReadyStart = gamepadEx.gamepad.right_bumper;;
+        double go;
+        go=0;
+        boolean GetReady = gamepadEx.gamepad.dpad_down;
+        boolean GiveUp = gamepadEx.gamepad.b;
 
 
         double frontLeftPower  = axial + lateral + yaw;
@@ -85,12 +92,52 @@ public  class DrivebaseSubsystem extends SubsystemBase {
 
         }
 
+        if(GetReady){
+            go = 1;
+        }
+
+        if(go==1) {
+
+            if (TheFitnessGramPacerTestIsAMultistageAerobicCapacityTestThatProgressivelyGetsMoreDifficultAsItContinuesThe20MeterPacerTestWillBeginIn30SecondsLineUpAtTheStartTheRunningSpeedStartsSlowlyButGetsFasterEachMinuteAfterYouHearThisSignalBeepASingleLapShouldBeCompletedEachTimeYouHearThisSoundDINGRememberToRunInAStraightLineAndRunAsLongAsPossibleTheSecondTimeYouFailCoCompleteALapBeforeTheSoundYourTestIsOverTheTestWillBeginOnTheWordStartOnYourMarkGetReadyStart) {
+                frontLeft.setPower(1000);
+                backLeft.setPower(1000);
+                backRight.setPower(1000);
+                backLeft.setPower(1000);
+                m_timer.reset();
+            }
+            if (OkTheFitnessGramPacerTestIsAMultistageAerobicCapacityTestThatProgressivelyGetsMoreDifficultAsItContinuesThe20MeterPacerTestWillBeginIn30SecondsLineUpAtTheStartTheRunningSpeedStartsSlowlyButGetsFasterEachMinuteAfterYouHearThisSignalBeepASingleLapShouldBeCompletedEachTimeYouHearThisSoundDINGRememberToRunInAStraightLineAndRunAsLongAsPossibleTheSecondTimeYouFailCoCompleteALapBeforeTheSoundYourTestIsOverTheTestWillBeginOnTheWordStartOnYourMarkGetReadyStart) {
+                frontLeft.setPower(-1000);
+                backLeft.setPower(-1000);
+                backRight.setPower(-1000);
+                backLeft.setPower(-1000);
+                m_timer.reset();
+            }
+
+            if (GiveUp){
+                frontLeft.setPower(frontLeftPower);
+                frontRight.setPower(frontRightPower);
+                backLeft.setPower(backLeftPower);
+                backRight.setPower(backRightPower);
+            }
+            if (go == 1) {
+
+                if (Time == 1000) {
+                    go = 2;
+                }
+            }
+        }
+
+
+
+
         if (teleop) {
             frontLeft.setPower(frontLeftPower);
             frontRight.setPower(frontRightPower);
             backLeft.setPower(backLeftPower);
             backRight.setPower(backRightPower);
         }
+
+        
 
 
     }

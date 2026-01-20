@@ -13,24 +13,21 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-/**
- * A gripper mechanism that grabs a stone from the quarry.
- * Centered around the Skystone game for FTC that was done in the 2019
- * to 2020 season.
- */
+
 public  class ShooterSubsystem extends SubsystemBase {
 
     Telemetry m_telemetry;
 
-    // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
 
     public DcMotor intake = null;
     DcMotorEx shooter = null;
 
     Servo kicker = null;
+
     public Servo flap = null;
     Servo door = null;
+
     public boolean teleop;
     GamepadEx gamepadEx;
 
@@ -50,9 +47,6 @@ public  class ShooterSubsystem extends SubsystemBase {
 
 
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
         intake = hMap.get(DcMotor.class, "intake");
         shooter = hMap.get(DcMotorEx.class, "shooter");
 
@@ -61,9 +55,6 @@ public  class ShooterSubsystem extends SubsystemBase {
         door = hMap.get(Servo.class, "door");
 
 
-        // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
-        // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
-        // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         intake.setDirection(DcMotor.Direction.FORWARD);
         shooter.setDirection(DcMotorSimple.Direction.FORWARD);
         shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 15.7025));
@@ -78,21 +69,12 @@ public  class ShooterSubsystem extends SubsystemBase {
 
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit START
-     */
 
 
-    /*
-     * Code to run ONCE when the driver hits START
-     */
 
-    /*
-     * Code to run REPEATEDLY after the driver hits START but before they hit STOP
-     */
     @Override
     public void periodic() {
-        // Setup a variable for each drive wheel to save power level for telemetry
+
 
 
 
