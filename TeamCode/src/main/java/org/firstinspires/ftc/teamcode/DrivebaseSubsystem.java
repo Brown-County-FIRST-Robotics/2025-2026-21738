@@ -44,10 +44,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
 
 
 
-       /*frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.FORWARD);*/
+
 
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
@@ -62,10 +59,7 @@ public  class DrivebaseSubsystem extends SubsystemBase {
     public void periodic() {
         // Setup a variable for each drive wheel to save power level for telemetry
 
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
+
 
 
         double axial   =  this.gamepadEx.getLeftY();
