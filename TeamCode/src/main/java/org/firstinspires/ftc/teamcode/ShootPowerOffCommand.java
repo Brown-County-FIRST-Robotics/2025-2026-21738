@@ -26,7 +26,7 @@ public class ShootPowerOffCommand extends CommandBase {
         isFinished = false;
         m_subsystem.door.setPosition(0);
         m_subsystem.kicker.setPosition(0);
-        m_subsystem.shooter.setVelocity(0);
+        m_subsystem.shooter.setVelocity(1000);
         m_timer.reset();
 
     }

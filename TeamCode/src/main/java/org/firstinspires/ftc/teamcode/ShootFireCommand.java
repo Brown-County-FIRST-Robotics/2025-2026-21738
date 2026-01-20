@@ -3,19 +3,17 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.seattlesolvers.solverslib.command.CommandBase;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 public class ShootFireCommand extends CommandBase {
 
     ShooterSubsystem m_subsystem;
-    Telemetry m_telemetry;
+   // Telemetry m_telemetry;
     boolean isFinished =false;
 
     ElapsedTime m_timer = new ElapsedTime();
 
-    public ShootFireCommand(ShooterSubsystem subsystem, Telemetry telemetry) {
+    public ShootFireCommand(ShooterSubsystem subsystem, Object o) {
         m_subsystem = subsystem;
-        m_telemetry = telemetry;
+       // m_telemetry = telemetry;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }

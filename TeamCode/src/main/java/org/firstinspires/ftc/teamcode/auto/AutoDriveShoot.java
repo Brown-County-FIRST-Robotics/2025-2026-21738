@@ -27,7 +27,7 @@ public class AutoDriveShoot extends CommandOpMode {
     public void initialize() {
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
-        ShooterSubsystem s = new ShooterSubsystem(gamepadEx, hardwareMap);
+        ShooterSubsystem s = new ShooterSubsystem(gamepadEx, hardwareMap, telemetry);
         d.teleop = false;
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);

@@ -11,12 +11,16 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 /**
  * A gripper mechanism that grabs a stone from the quarry.
  * Centered around the Skystone game for FTC that was done in the 2019
  * to 2020 season.
  */
 public  class ShooterSubsystem extends SubsystemBase {
+
+    Telemetry m_telemetry;
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -31,12 +35,17 @@ public  class ShooterSubsystem extends SubsystemBase {
     GamepadEx gamepadEx;
 
     public double shooterSetSpeed;
+    double deathCommand;
+
 
     public double intakePower;
 
-    public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap) {
+    public ShooterSubsystem(GamepadEx gamepadEx, final HardwareMap hMap, Telemetry telemetry) {
         this.gamepadEx = gamepadEx;
         teleop = true;
+        m_telemetry = telemetry;
+        shooterSetSpeed = 1000;
+        deathCommand = 10;
 
 
 
@@ -62,7 +71,8 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         this.door.setPosition(0);
         this.kicker.setPosition(0);
-        this.shooter.setVelocity(0);
+        this.shooter.setVelocity(1000);
+
 
 
 
@@ -94,7 +104,9 @@ public  class ShooterSubsystem extends SubsystemBase {
         boolean Left = gamepadEx.gamepad.dpad_left;
         boolean Right = gamepadEx.gamepad.dpad_right;
         boolean Gate = gamepadEx.gamepad.x;
-
+        boolean StopTheAnnoyingSound = gamepadEx.gamepad.left_bumper;
+        boolean OkFine = gamepadEx.gamepad.right_bumper;
+        double Flap = flap.getPosition();
 
 
 
@@ -118,17 +130,36 @@ public  class ShooterSubsystem extends SubsystemBase {
             door.setPosition(84/300.0);
         }
 
-       /* if(Left){
-            flap.setPosition(0);
-            shooterSetSpeed=1600;
 
+        double flapPos = flap.getPosition();
+        double step = 5 / 300.0;
+
+        if (Left) {
+            flapPos += step;
+            flap.setPosition(flapPos);
         }
 
-        if(Right){
-            flap.setPosition(1);
-            shooterSetSpeed=1200;
+        if (Right) {
+            flapPos -= step;
+            flap.setPosition(flapPos);
+        }
 
-        }*/
+
+        m_telemetry.addLine();
+        m_telemetry.addData("flap", flapPos);
+        m_telemetry.update();
+
+
+        flapPos = Math.max(0.0, Math.min(1.0, flapPos));
+
+        flap.setPosition(flapPos);
+
+        if(StopTheAnnoyingSound){
+            shooterSetSpeed=0;
+        }
+        if(OkFine){
+            shooterSetSpeed=1000;
+        }
         if (teleop) {
             intakePower = -1 * signedSquare(swallow) + 1 * signedSquare(out);;
         }
