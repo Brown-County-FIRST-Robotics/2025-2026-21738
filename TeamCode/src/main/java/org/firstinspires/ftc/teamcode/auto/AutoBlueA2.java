@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Blue A2 new", group="Autonomous")
+@Autonomous(name="Blue A2", group="Autonomous")
 public class AutoBlueA2 extends CommandOpMode {
     Follower follower;
     boolean red = false;

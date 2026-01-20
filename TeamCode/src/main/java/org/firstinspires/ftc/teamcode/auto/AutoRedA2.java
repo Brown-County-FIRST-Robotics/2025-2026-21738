@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Red A2 new", group="Autonomous")
+@Autonomous(name="Red A2", group="Autonomous")
 public class AutoRedA2 extends CommandOpMode {
     Follower follower;
     boolean red = true;
