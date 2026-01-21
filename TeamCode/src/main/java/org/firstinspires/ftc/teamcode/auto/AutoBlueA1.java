@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.auto;
-//  ./gradlew reloadFastLoad run this command
+
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Blue A1", group = "Autonomous")
+@Autonomous(name="Blue A1 1/20/2026", group = "Autonomous")
 public class AutoBlueA1 extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -40,7 +40,7 @@ public class AutoBlueA1 extends CommandOpMode {
         follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
         follower.update();
         s.flap.setPosition(0);
-        s.shooterSetSpeed = 1170;
+        s.shooterSetSpeed = 1150;
         s.teleop = false;
         d.teleop = false;
         // real path here
@@ -57,7 +57,7 @@ public class AutoBlueA1 extends CommandOpMode {
                 new intakeCommand(s, -1),
                 new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 21, AngleUnit.DEGREES, 180), 0.2, red),
                 new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 53, 21, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 work.
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 53-2.8, 106-2.8, AngleUnit.DEGREES, 143), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50-2.8, 106-2.8, AngleUnit.DEGREES, 143), 1, red),
                 new intakeCommand(s, 0),
                 new launchCommand(s),
                 new launchCommand(s),

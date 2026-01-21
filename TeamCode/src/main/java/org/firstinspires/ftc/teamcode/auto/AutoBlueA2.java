@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Blue A2", group="Autonomous")
+@Autonomous(name="Blue A2 1/20/2026", group="Autonomous")
 public class AutoBlueA2 extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -46,17 +46,17 @@ public class AutoBlueA2 extends CommandOpMode {
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 23, AngleUnit.DEGREES, 115), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 115), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 39, AngleUnit.DEGREES, 180), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 42, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 39, AngleUnit.DEGREES, 180), 0.2, red),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 58, 23, AngleUnit.DEGREES, 115), 0.8, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 42, AngleUnit.DEGREES, 180), 0.2, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 115), 1, red),
                 new intakeCommand(s, 0),
                 new launchCommand(s),
                 new launchCommand(s),
