@@ -13,6 +13,7 @@
 
 // Include common definitions from above.
 
+
 buildscript {
     repositories {
         mavenCentral()
@@ -25,11 +26,31 @@ buildscript {
         }
 }
 
-
+plugins {
+    id "com.peterabeles.gversion" version "1.10.3"
+}
 apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
 
 apply plugin: 'org.team11260.fast-load-plugin'
+
+
+
+gversion {
+    srcDir = "src/main/java"
+    classPackage = "org.firstinspires.ftc.teamcode"
+    className = "BuildConstents"
+    dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    timeZone = "UTC"
+    debug = false
+    language = "java"
+    explicitType = false
+    indent = "\t"
+    annotate = false
+}
+
+// project.compileJava.dependsOn(createVersionFile)
+project(':TeamCode').preBuild.dependsOn(createVersionFile)
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
