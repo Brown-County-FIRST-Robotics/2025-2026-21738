@@ -64,7 +64,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-@Disabled
 public class BasicOmniOpMode_Linear extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
@@ -79,10 +78,10 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeftDrive");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
+        backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -111,8 +110,8 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
+            double lateral   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            double axial =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
