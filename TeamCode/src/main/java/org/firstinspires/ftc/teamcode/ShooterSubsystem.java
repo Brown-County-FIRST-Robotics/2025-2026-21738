@@ -24,6 +24,7 @@ public  class ShooterSubsystem extends SubsystemBase {
     DcMotorEx shooter = null;
 
 
+
     Servo kicker = null;
 
     public Servo flap = null;
