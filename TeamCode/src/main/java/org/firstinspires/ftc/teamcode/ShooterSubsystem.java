@@ -23,6 +23,7 @@ public  class ShooterSubsystem extends SubsystemBase {
     public DcMotor intake = null;
     DcMotorEx shooter = null;
 
+
     Servo kicker = null;
 
     public Servo flap = null;
@@ -62,7 +63,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         this.door.setPosition(0);
         this.kicker.setPosition(0);
-        this.shooter.setVelocity(1000);
+        this.shooter.setVelocity(0);
 
 
 
@@ -97,7 +98,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         if(Up){
             flap.setPosition(250.0/300);
-            shooterSetSpeed=1650;
+            shooterSetSpeed=1600;
 
 
         }
@@ -108,27 +109,30 @@ public  class ShooterSubsystem extends SubsystemBase {
 
 
         }
+        if (Left){
+            flap.setPosition(150.0/300);
+            shooterSetSpeed=1350;
+
+
+        }
         if(Gate){
             door.setPosition(84/300.0);
+
         }
 
 
         double flapPos = flap.getPosition();
         double step = 5 / 300.0;
 
-        if (Left) {
-            flapPos += step;
-            flap.setPosition(flapPos);
-        }
 
-        if (Right) {
-            flapPos -= step;
-            flap.setPosition(flapPos);
-        }
+
+
+
 
 
         m_telemetry.addLine();
         m_telemetry.addData("flap", flapPos);
+        m_telemetry.addData("spped",shooterSetSpeed);
         m_telemetry.update();
 
 
@@ -138,13 +142,16 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         if(StopTheAnnoyingSound){
             shooterSetSpeed=0;
+
         }
         if(OkFine){
-            shooterSetSpeed=1000;
+            shooterSetSpeed=0;
+
         }
         if (teleop) {
             intakePower = -1 * signedSquare(swallow) + 1 * signedSquare(out);;
         }
+
         intake.setPower(intakePower);
     }
 

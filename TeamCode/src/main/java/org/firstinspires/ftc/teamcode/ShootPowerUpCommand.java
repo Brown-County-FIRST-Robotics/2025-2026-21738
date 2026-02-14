@@ -8,6 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class ShootPowerUpCommand extends CommandBase {
 
     ShooterSubsystem m_subsystem;
+
     ElapsedTime m_timer = new ElapsedTime();
     Telemetry m_telemetry;
     boolean isFinished =false;
@@ -32,6 +33,7 @@ public class ShootPowerUpCommand extends CommandBase {
         isFinished =false;
         m_subsystem.kicker.setPosition(0);
         m_subsystem.shooter.setVelocity(m_subsystem.shooterSetSpeed);
+
         m_timer.reset();
 
     }
