@@ -33,6 +33,7 @@ public class ShootPowerUpCommand extends CommandBase {
     public void initialize() {
         isFinished =false;
         m_subsystem.kicker.setPosition(0);
+        m_subsystem.LimeServo.setPosition(0);
         m_subsystem.shooter.setVelocity(m_subsystem.shooterSetSpeed);
         m_subsystem.intake.setPower(m_subsystem.intakePower);
 
@@ -43,7 +44,6 @@ public class ShootPowerUpCommand extends CommandBase {
     public void execute() {
         if (m_subsystem.shooter.getVelocity() >= m_subsystem.shooterSetSpeed) {
          //   m_subsystem.kicker.setPosition(85/300.0);
-            m_subsystem.intake.setPower(m_subsystem.intakePower);
 
 
 

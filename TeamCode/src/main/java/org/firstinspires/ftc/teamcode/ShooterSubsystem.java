@@ -28,6 +28,7 @@ public  class ShooterSubsystem extends SubsystemBase {
     Servo kicker = null;
 
     public Servo flap = null;
+    public Servo LimeServo = null;
     Servo door = null;
 
     public boolean teleop;
@@ -89,8 +90,10 @@ public  class ShooterSubsystem extends SubsystemBase {
         boolean Right = gamepadEx.gamepad.dpad_right;
         boolean Gate = gamepadEx.gamepad.x;
         boolean StopTheAnnoyingSound = gamepadEx.gamepad.left_bumper;
+
         boolean OkFine = gamepadEx.gamepad.right_bumper;
         double Flap = flap.getPosition();
+
 
 
 
@@ -124,8 +127,6 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         double flapPos = flap.getPosition();
         double step = 5 / 300.0;
-
-
 
 
 

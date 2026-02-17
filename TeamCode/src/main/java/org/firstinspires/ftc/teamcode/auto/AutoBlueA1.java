@@ -27,11 +27,13 @@ public class AutoBlueA1 extends CommandOpMode {
     boolean red = false;
     @Override
     public void initialize() {
+
         follower = Constants.createFollower(hardwareMap);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap, telemetry);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
+        s.LimeServo.setPosition(15/300.0);
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
         d.backLeft.setPower(0);
