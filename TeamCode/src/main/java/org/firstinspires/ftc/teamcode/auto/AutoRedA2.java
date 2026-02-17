@@ -30,7 +30,7 @@ public class AutoRedA2 extends CommandOpMode {
         follower = Constants.createFollower(hardwareMap);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
-        ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap,telemetry);
+        ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);

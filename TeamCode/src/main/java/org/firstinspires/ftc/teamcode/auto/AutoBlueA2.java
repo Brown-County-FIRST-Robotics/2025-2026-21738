@@ -30,7 +30,7 @@ public class AutoBlueA2 extends CommandOpMode {
         follower = Constants.createFollower(hardwareMap);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
-        ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap,telemetry);
+        ShooterSubsystem s = new ShooterSubsystem(gamepadEx2, hardwareMap);
         DrivebaseSubsystem d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
@@ -64,7 +64,7 @@ public class AutoBlueA2 extends CommandOpMode {
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 36, 17, AngleUnit.DEGREES, 115), 1, red)
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 37, 15, AngleUnit.DEGREES, 115), 1, red)
         );
         path.schedule();
     }
