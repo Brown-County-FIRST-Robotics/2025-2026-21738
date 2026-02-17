@@ -52,6 +52,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         intake = hMap.get(DcMotor.class, "intake");
         shooter = hMap.get(DcMotorEx.class, "shooter");
+        LimeServo = hMap.get(Servo.class, "limeservo");
 
         kicker = hMap.get(Servo.class, "kicker");
         flap = hMap.get(Servo.class, "flap");
