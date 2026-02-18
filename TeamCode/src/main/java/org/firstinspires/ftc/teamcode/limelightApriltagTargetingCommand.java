@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.command.CommandBase;
 import com.seattlesolvers.solverslib.controller.PIDController;
 
-public class limelightArtifactTrackingCommand extends CommandBase {
+public class limelightApriltagTargetingCommand extends CommandBase {
     HardwareMap hMap;
     boolean isFinished;
 
@@ -22,7 +20,7 @@ public class limelightArtifactTrackingCommand extends CommandBase {
     DcMotorEx frontRight;
     DcMotorEx backLeft;
     DcMotorEx backRight;
-    public limelightArtifactTrackingCommand(HardwareMap hmap) {
+    public limelightApriltagTargetingCommand(HardwareMap hmap) {
         hMap = hmap;
         isFinished = false;
     }
@@ -30,21 +28,21 @@ public class limelightArtifactTrackingCommand extends CommandBase {
     public void initialize() {
         super.initialize();
         limelight = hMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(1);
+        limelight.pipelineSwitch(0);
 
         frontLeft = hMap.get(DcMotorEx.class, "frontLeft");
         frontRight = hMap.get(DcMotorEx.class, "frontRight");
         backLeft = hMap.get(DcMotorEx.class, "backLeft");
         backRight = hMap.get(DcMotorEx.class, "backRight");
         servo = hMap.get(Servo.class, "limeservo");
-        servo.setPosition(0.0/300);
+        servo.setPosition(30.0/300);
 
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
-        pid = new PIDController(0.045, 0, 0.10);
+        pid = new PIDController(0.04, 0, 0.2);
         pid.setSetPoint(0);
         pid.setTolerance(2.5);
 
@@ -71,8 +69,8 @@ public class limelightArtifactTrackingCommand extends CommandBase {
 
         double frontLeftPower = -right;
         double frontRightPower = right;
-        double backLeftPower = right;
-        double backRightPower = -right;
+        double backLeftPower = -right;
+        double backRightPower = right;
 
         double max;
         max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
