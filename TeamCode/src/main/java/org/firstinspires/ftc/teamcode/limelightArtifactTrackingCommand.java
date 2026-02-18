@@ -18,43 +18,27 @@ public class limelightArtifactTrackingCommand extends CommandBase {
     Servo servo;
     Limelight3A limelight;
     PIDController pid;
-    DcMotorEx frontLeft;
-    DcMotorEx frontRight;
-    DcMotorEx backLeft;
-    DcMotorEx backRight;
-    public limelightArtifactTrackingCommand(HardwareMap hmap) {
-        hMap = hmap;
+    DrivebaseSubsystem d;
+    LimelightSubsystem l;
+    public limelightArtifactTrackingCommand(DrivebaseSubsystem D, LimelightSubsystem L) {
         isFinished = false;
+        d = D;
+        l = L;
     }
     @Override
     public void initialize() {
         super.initialize();
-        limelight = hMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(1);
-
-        frontLeft = hMap.get(DcMotorEx.class, "frontLeft");
-        frontRight = hMap.get(DcMotorEx.class, "frontRight");
-        backLeft = hMap.get(DcMotorEx.class, "backLeft");
-        backRight = hMap.get(DcMotorEx.class, "backRight");
-        servo = hMap.get(Servo.class, "limeservo");
-        servo.setPosition(0.0/300);
-
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
+        l.auto();
 
         pid = new PIDController(0.045, 0, 0.10);
         pid.setSetPoint(0);
         pid.setTolerance(2.5);
-
-        limelight.start();
     }
     @Override
     public void execute() {
         super.execute();
 
-        LLResult result = limelight.getLatestResult();
+        LLResult result = l.data;
         double right = 0;
 
         if (result != null) {
@@ -86,10 +70,10 @@ public class limelightArtifactTrackingCommand extends CommandBase {
             backRightPower /= max;
         }
 
-        frontLeft.setPower(frontLeftPower);
-        frontRight.setPower(frontRightPower);
-        backLeft.setPower(backLeftPower);
-        backRight.setPower(backRightPower);
+        d.frontLeft.setPower(frontLeftPower);
+        d.frontRight.setPower(frontRightPower);
+        d.backLeft.setPower(backLeftPower);
+        d.backRight.setPower(backRightPower);
     }
     @Override
     public boolean isFinished() {
@@ -97,10 +81,9 @@ public class limelightArtifactTrackingCommand extends CommandBase {
     }
 
     public void end(boolean canceled) {
-        limelight.stop();
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        backLeft.setPower(0);
-        backRight.setPower(0);
+        d.frontLeft.setPower(0);
+        d.frontRight.setPower(0);
+        d.backLeft.setPower(0);
+        d.backRight.setPower(0);
     }
 }
