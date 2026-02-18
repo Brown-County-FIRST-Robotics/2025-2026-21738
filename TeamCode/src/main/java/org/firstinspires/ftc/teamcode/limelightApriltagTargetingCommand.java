@@ -20,15 +20,18 @@ public class limelightApriltagTargetingCommand extends CommandBase {
     PIDController pid;
     DrivebaseSubsystem d;
     LimelightSubsystem l;
+    boolean oldTeleop;
     public limelightApriltagTargetingCommand(DrivebaseSubsystem D, LimelightSubsystem L) {
         isFinished = false;
         d = D;
         l = L;
+        oldTeleop = d.teleop;
     }
     @Override
     public void initialize() {
         super.initialize();
         l.teleop();
+        d.teleop = false;
 
         pid = new PIDController(0.04, 0, 0.2);
         pid.setSetPoint(0);
@@ -81,6 +84,7 @@ public class limelightApriltagTargetingCommand extends CommandBase {
     }
 
     public void end(boolean canceled) {
+        d.teleop = oldTeleop;
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
         d.backLeft.setPower(0);

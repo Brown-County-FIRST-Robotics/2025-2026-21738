@@ -4,16 +4,16 @@ package org.firstinspires.ftc.teamcode;
  * Automatically generated file containing build version information.
  */
 public final class BuildConstents {
-	public static final String MAVEN_GROUP = "FtcRobotController";
+	public static final String MAVEN_GROUP = "2025-2026-21738";
 	public static final String MAVEN_NAME = "TeamCode";
 	public static final String VERSION = "unspecified";
-	public static final int GIT_REVISION = 110;
-	public static final String GIT_SHA = "c04a56cac3ee7801a7d7b195ef7f564bea797010";
-	public static final String GIT_DATE = "2026-02-17T23:04:15Z";
+	public static final int GIT_REVISION = 113;
+	public static final String GIT_SHA = "680ec7f71bb2a02cfa418490911a1bf5559be4bc";
+	public static final String GIT_DATE = "2026-02-18T14:31:04Z";
 	public static final String GIT_BRANCH = "master";
-	public static final String BUILD_DATE = "2026-02-17T23:20:40Z";
-	public static final long BUILD_UNIX_TIME = 1771370440085L;
-	public static final int DIRTY = 1;
+	public static final String BUILD_DATE = "2026-02-18T14:34:53Z";
+	public static final long BUILD_UNIX_TIME = 1771425293495L;
+	public static final int DIRTY = 0;
 
 	private BuildConstents(){}
 }

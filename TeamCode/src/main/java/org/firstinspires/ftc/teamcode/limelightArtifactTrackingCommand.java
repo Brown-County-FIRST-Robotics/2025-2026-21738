@@ -20,10 +20,12 @@ public class limelightArtifactTrackingCommand extends CommandBase {
     PIDController pid;
     DrivebaseSubsystem d;
     LimelightSubsystem l;
+    boolean oldTeleop;
     public limelightArtifactTrackingCommand(DrivebaseSubsystem D, LimelightSubsystem L) {
         isFinished = false;
         d = D;
         l = L;
+        oldTeleop = d.teleop;
     }
     @Override
     public void initialize() {
@@ -81,6 +83,7 @@ public class limelightArtifactTrackingCommand extends CommandBase {
     }
 
     public void end(boolean canceled) {
+        d.teleop = oldTeleop;
         d.frontLeft.setPower(0);
         d.frontRight.setPower(0);
         d.backLeft.setPower(0);

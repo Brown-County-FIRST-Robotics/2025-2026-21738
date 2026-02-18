@@ -1,91 +1,64 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.seattlesolvers.solverslib.controller.PIDController;
+import com.seattlesolvers.solverslib.command.CommandOpMode;
+import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
+import com.seattlesolvers.solverslib.command.button.Button;
+import com.seattlesolvers.solverslib.command.button.GamepadButton;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
+import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
 
-@TeleOp(name="Limelight Targeting artifacts")
-public class limelightTargeting extends LinearOpMode {
-    private Limelight3A limelight;
-    private boolean complete;
-    private Servo servo;
+import java.util.concurrent.Delayed;
+
+import kotlinx.coroutines.Delay;
+
+
+@TeleOp(name="main with limelight", group="OpMode")
+public class limelightTargeting extends CommandOpMode {
+
+    ShooterSubsystem s;
+    DrivebaseSubsystem d;
+    LimelightSubsystem l;
+    ShooterSpeed sh;
+
     @Override
-    public void runOpMode() {
-        limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(1);
+    public void initialize() {
+        GamepadEx gamepadEx = new GamepadEx(gamepad1);
+        GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
+        s = new ShooterSubsystem(gamepadEx2, hardwareMap, telemetry);
+        d = new DrivebaseSubsystem(gamepadEx, hardwareMap);
+        l = new LimelightSubsystem(hardwareMap, telemetry);
 
-        DcMotorEx frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
-        DcMotorEx frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
-        DcMotorEx backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
-        DcMotorEx backRight = hardwareMap.get(DcMotorEx.class, "backRight");
-        servo = hardwareMap.get(Servo.class, "limeservo");
-        servo.setPosition(0/300);
+        s.flap.setPosition(0);
+        s.shooterSetSpeed=1200;
 
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
+        Button shooterButton = new GamepadButton(
+                gamepadEx2, GamepadKeys.Button.A);
 
-        PIDController pid = new PIDController(0.045, 0, 0.10);
-        pid.setSetPoint(0);
-        pid.setTolerance(2.5);
-        limelight.start();
-        waitForStart();
-        while (opModeIsActive()) {
-            LLResult result = limelight.getLatestResult();
-            double right = 0;
-            if (result != null) {
-                if (result.isValid()) {
-                    telemetry.addData("tx", result.getTx());
-                    right = pid.calculate(result.getTx());
-                    telemetry.update();
-                }else {
-                    telemetry.addLine("No Target.");
-                }
-            }else {
-                telemetry.addLine("No Target.");
-            }
-            if (pid.atSetPoint() || complete) {
-                telemetry.addLine("Complete.");
-                frontLeft.setPower(0);
-                frontRight.setPower(0);
-                backLeft.setPower(0);
-                backRight.setPower(0);
-                complete = true;
-            }
-            if (!complete) {
-                double frontLeftPower = -right;
-                double frontRightPower = right;
-                double backLeftPower = right;
-                double backRightPower = -right;
+        double speed;
 
-                double max;
-                max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
-                max = Math.max(max, Math.abs(backLeftPower));
-                max = Math.max(max, Math.abs(backRightPower));
+        shooterButton.whileHeld(new launchCommand(s));
+        shooterButton.whenReleased(new ShootPowerOffCommand(s, telemetry));
 
-                if (max > 1.0) {
-                    frontLeftPower /= max;
-                    frontRightPower /= max;
-                    backLeftPower /= max;
-                    backRightPower /= max;
-                }
+        Button shakeButton = new GamepadButton(
+                gamepadEx2, GamepadKeys.Button.Y);
+        shakeButton.whileHeld(new shake(d));
 
-                frontLeft.setPower(frontLeftPower);
-                frontRight.setPower(frontRightPower);
-                backLeft.setPower(backLeftPower);
-                backRight.setPower(backRightPower);
-            }
-            telemetry.update();
-        }
-        limelight.stop();
+
+
+        Button Artifacts = new GamepadButton(
+                gamepadEx, GamepadKeys.Button.Y);
+
+        Button AprilTag = new GamepadButton(
+                gamepadEx, GamepadKeys.Button.Y);
+
+        Artifacts.whenHeld(new limelightArtifactTrackingCommand(d, l));
+        AprilTag.whenHeld(new limelightApriltagTargetingCommand(d, l));
     }
 }

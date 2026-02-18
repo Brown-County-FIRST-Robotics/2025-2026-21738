@@ -11,28 +11,29 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.seattlesolvers.solverslib.controller.PIDController;
 
 @Disabled
-@TeleOp(name="Limelight Targeting apriltags")
-public class limelightTargetingApriltags extends LinearOpMode {
+@TeleOp(name="Limelight Targeting artifacts")
+public class limelightTargetingArtifacts extends LinearOpMode {
     private Limelight3A limelight;
     private boolean complete;
     private Servo servo;
     @Override
     public void runOpMode() {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(0);
+        limelight.pipelineSwitch(1);
 
         DcMotorEx frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
         DcMotorEx frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
         DcMotorEx backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
         DcMotorEx backRight = hardwareMap.get(DcMotorEx.class, "backRight");
         servo = hardwareMap.get(Servo.class, "limeservo");
-        servo.setPosition(30.0/300);
+        servo.setPosition(0/300);
+
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
-        PIDController pid = new PIDController(0.04, 0, 0.2);
+        PIDController pid = new PIDController(0.045, 0, 0.10);
         pid.setSetPoint(0);
         pid.setTolerance(2.5);
         limelight.start();
@@ -62,8 +63,8 @@ public class limelightTargetingApriltags extends LinearOpMode {
             if (!complete) {
                 double frontLeftPower = -right;
                 double frontRightPower = right;
-                double backLeftPower = -right;
-                double backRightPower = right;
+                double backLeftPower = right;
+                double backRightPower = -right;
 
                 double max;
                 max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
