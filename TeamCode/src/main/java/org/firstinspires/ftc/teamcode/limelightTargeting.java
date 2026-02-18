@@ -53,10 +53,10 @@ public class limelightTargeting extends CommandOpMode {
 
 
         Button Artifacts = new GamepadButton(
-                gamepadEx, GamepadKeys.Button.Y);
+                gamepadEx, GamepadKeys.Button.RIGHT_BUMPER);
 
         Button AprilTag = new GamepadButton(
-                gamepadEx, GamepadKeys.Button.Y);
+                gamepadEx, GamepadKeys.Button.LEFT_BUMPER);
 
         Artifacts.whenHeld(new limelightArtifactTrackingCommand(d, l));
         AprilTag.whenHeld(new limelightApriltagTargetingCommand(d, l));
