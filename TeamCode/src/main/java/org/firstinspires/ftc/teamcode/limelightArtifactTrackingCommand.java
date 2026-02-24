@@ -32,7 +32,7 @@ public class limelightArtifactTrackingCommand extends CommandBase {
         super.initialize();
         l.auto();
 
-        pid = new PIDController(0.045, 0, 0.10);
+        pid = new PIDController(0.07, 0, 0.10);
         pid.setSetPoint(0);
         pid.setTolerance(2.5);
     }

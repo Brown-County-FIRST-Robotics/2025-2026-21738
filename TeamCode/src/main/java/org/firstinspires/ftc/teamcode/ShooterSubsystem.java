@@ -136,6 +136,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         m_telemetry.addLine();
         m_telemetry.addData("flap", flapPos);
         m_telemetry.addData("spped",shooterSetSpeed);
+        m_telemetry.addData("real speed", this.shooter.getVelocity());
         m_telemetry.update();
 
 
