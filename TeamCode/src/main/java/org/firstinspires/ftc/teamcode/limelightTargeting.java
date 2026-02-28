@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.seattlesolvers.solverslib.command.CommandOpMode;
 import com.seattlesolvers.solverslib.command.SequentialCommandGroup;
@@ -18,7 +19,7 @@ import java.util.concurrent.Delayed;
 
 import kotlinx.coroutines.Delay;
 
-
+@Disabled
 @TeleOp(name="main with limelight", group="OpMode")
 public class limelightTargeting extends CommandOpMode {
 
@@ -53,10 +54,10 @@ public class limelightTargeting extends CommandOpMode {
 
 
         Button Artifacts = new GamepadButton(
-                gamepadEx, GamepadKeys.Button.Y);
+                gamepadEx, GamepadKeys.Button.RIGHT_BUMPER);
 
         Button AprilTag = new GamepadButton(
-                gamepadEx, GamepadKeys.Button.Y);
+                gamepadEx, GamepadKeys.Button.LEFT_BUMPER);
 
         Artifacts.whenHeld(new limelightArtifactTrackingCommand(d, l));
         AprilTag.whenHeld(new limelightApriltagTargetingCommand(d, l));

@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Red C1 1/20/2026", group = "Autonomous")
+@Autonomous(name="Red C1 2/28/2026", group = "Autonomous")
 public class AutoRedC1 extends CommandOpMode {
     Follower follower;
     final boolean red = true;
@@ -39,8 +39,8 @@ public class AutoRedC1 extends CommandOpMode {
         follower.update();
         follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
         follower.update();
-        s.flap.setPosition(0);
-        s.shooterSetSpeed = 1170;
+        s.flap.setPosition(100.0/300);
+        s.shooterSetSpeed = 1200;
         s.teleop = false;
         d.teleop = false;
         // real path here
@@ -53,10 +53,10 @@ public class AutoRedC1 extends CommandOpMode {
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 55, 77, AngleUnit.DEGREES, 180), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 55, 81, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 77, AngleUnit.DEGREES, 180), 0.2, red), // x was 23
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 55, 77, AngleUnit.DEGREES, 135), 1, red),
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 22.5, 81, AngleUnit.DEGREES, 180), 0.2, red), // x was 23
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 55, 81, AngleUnit.DEGREES, 135), 1, red),
                 new intakeCommand(s, 0),
                 new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50, 99, AngleUnit.DEGREES, 143), 1, red),
                 new launchCommand(s),

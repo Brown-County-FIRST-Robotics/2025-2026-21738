@@ -61,7 +61,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         intake.setDirection(DcMotor.Direction.FORWARD);
         shooter.setDirection(DcMotorSimple.Direction.FORWARD);
-        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(300, 0, 0, 15.7025));
+        shooter.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(350, 0, 0, 15.7025));
 
 
         this.door.setPosition(0);
@@ -103,7 +103,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         if(Up){
             flap.setPosition(250.0/300);
-            shooterSetSpeed=1600;
+            shooterSetSpeed=1550;
 
 
         }
@@ -116,7 +116,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         }
         if (Left){
             flap.setPosition(150.0/300);
-            shooterSetSpeed=1350;
+            shooterSetSpeed=1300;
 
 
         }
@@ -136,6 +136,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         m_telemetry.addLine();
         m_telemetry.addData("flap", flapPos);
         m_telemetry.addData("spped",shooterSetSpeed);
+        m_telemetry.addData("real speed", this.shooter.getVelocity());
         m_telemetry.update();
 
 

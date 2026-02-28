@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Blue A2 1/20/2026", group="Autonomous")
+@Autonomous(name="Blue A2 2/28/2026", group="Autonomous")
 public class AutoBlueA2 extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -40,22 +40,22 @@ public class AutoBlueA2 extends CommandOpMode {
         follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(57, 9, Math.toRadians(90)), red));
         follower.update();
         s.flap.setPosition(250.0/300);
-        s.shooterSetSpeed = 1650;
+        s.shooterSetSpeed = 1620;
         s.teleop = false;
         d.teleop = false;
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 115), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 110), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 42, AngleUnit.DEGREES, 180), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 40, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 42, AngleUnit.DEGREES, 180), 0.2, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 20, 40, AngleUnit.DEGREES, 180), 0.2, red),
                 new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 115), 1, red),
                 new intakeCommand(s, 0),
                 new launchCommand(s),
