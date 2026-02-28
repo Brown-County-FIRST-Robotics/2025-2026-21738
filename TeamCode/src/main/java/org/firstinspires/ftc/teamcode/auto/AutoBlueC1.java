@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Blue C1 2/24/2026", group = "Autonomous")
+@Autonomous(name="Blue C1 2/28/2026", group = "Autonomous")
 public class AutoBlueC1 extends CommandOpMode {
     Follower follower;
     boolean red = false;
@@ -53,10 +53,10 @@ public class AutoBlueC1 extends CommandOpMode {
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 53, 76, AngleUnit.DEGREES, 180), 1, red), // slow down for better accuracy
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 63, 79, AngleUnit.DEGREES, 180), 1, red), // slow down for better accuracy
                 new intakeCommand(s, -1),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 76, AngleUnit.DEGREES, 180), 0.2, red),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 53, 76, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 work.
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 79, AngleUnit.DEGREES, 180), 0.25, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 63, 79, AngleUnit.DEGREES, 135), 1, red),    // 45 inches is wrong it should be some thing else like 35 but 45 work.
                 new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 50-2.8, 106-2.8, AngleUnit.DEGREES, 143), 1, red),
                 new intakeCommand(s, 0),
                 new launchCommand(s),

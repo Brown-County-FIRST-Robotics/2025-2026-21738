@@ -19,6 +19,7 @@ import java.util.concurrent.Delayed;
 
 import kotlinx.coroutines.Delay;
 
+@Disabled
 @TeleOp(name="main with limelight", group="OpMode")
 public class limelightTargeting extends CommandOpMode {
 

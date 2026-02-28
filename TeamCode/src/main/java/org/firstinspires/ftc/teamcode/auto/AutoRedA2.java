@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Red A2 2/24/2026", group="Autonomous")
+@Autonomous(name="Red A2 2/28/2026", group="Autonomous")
 public class AutoRedA2 extends CommandOpMode {
     Follower follower;
     boolean red = true;
@@ -46,16 +46,16 @@ public class AutoRedA2 extends CommandOpMode {
         // real path here
         waitForStart();
         SequentialCommandGroup path = new SequentialCommandGroup(
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 114), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 14, AngleUnit.DEGREES, 110), 1, red),
                 new launchCommand(s),
                 new launchCommand(s),
                 new shake(d),
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 45, AngleUnit.DEGREES, 180), 1, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 45, 44, AngleUnit.DEGREES, 180), 1, red),
                 new intakeCommand(s, -1),
-                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 23, 45, AngleUnit.DEGREES, 180), 0.2, red),
+                new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 11, 44, AngleUnit.DEGREES, 180), 0.25, red),
                 new org.firstinspires.ftc.teamcode.auto.gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 59.5, 16, AngleUnit.DEGREES, 116), 1, red),
                 new intakeCommand(s, 0),
                 new launchCommand(s),
@@ -64,7 +64,7 @@ public class AutoRedA2 extends CommandOpMode {
                 new launchCommand(s),
                 new launchCommand(s),
                 new ShootPowerOffCommand(s, telemetry),
-                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 37, 15, AngleUnit.DEGREES, 115), 1, red)
+                new gotoCommand(follower, new Pose2D(DistanceUnit.INCH, 37, 15, AngleUnit.DEGREES, 113), 1, red)
         );
         path.schedule();
     }

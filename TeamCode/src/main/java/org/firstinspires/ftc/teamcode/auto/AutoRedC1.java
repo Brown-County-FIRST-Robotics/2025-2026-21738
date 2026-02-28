@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.shake;
 
 
-@Autonomous(name="Red C1 2/24/2026", group = "Autonomous")
+@Autonomous(name="Red C1 2/28/2026", group = "Autonomous")
 public class AutoRedC1 extends CommandOpMode {
     Follower follower;
     final boolean red = true;
@@ -39,8 +39,8 @@ public class AutoRedC1 extends CommandOpMode {
         follower.update();
         follower.setStartingPose(org.firstinspires.ftc.teamcode.auto.gotoCommand.scale(new Pose(27.6, 127.0, Math.toRadians(143)), red)); //old h = 216
         follower.update();
-        s.flap.setPosition(0);
-        s.shooterSetSpeed = 1170;
+        s.flap.setPosition(100.0/300);
+        s.shooterSetSpeed = 1200;
         s.teleop = false;
         d.teleop = false;
         // real path here
