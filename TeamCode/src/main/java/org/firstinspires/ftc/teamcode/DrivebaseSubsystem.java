@@ -38,10 +38,10 @@ public  class DrivebaseSubsystem extends SubsystemBase {
         shaker = gamepadEx.gamepad.y;
 
 
-        frontLeft = hMap.get(DcMotor.class, "frontLeftDrive");
-        frontRight = hMap.get(DcMotor.class, "frontRightDrive");
-        backLeft = hMap.get(DcMotor.class, "backLeftDrive");
-        backRight = hMap.get(DcMotor.class, "backRightDrive");
+        frontLeft = hMap.get(DcMotor.class, "frontLeft");
+        frontRight = hMap.get(DcMotor.class, "frontRight");
+        backLeft = hMap.get(DcMotor.class, "backLeft");
+        backRight = hMap.get(DcMotor.class, "backRight");
 
 
 
