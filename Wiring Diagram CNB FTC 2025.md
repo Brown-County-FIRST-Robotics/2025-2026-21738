@@ -1,4 +1,6 @@
-   CH[Control Hub]
+```mermaid
+graph LR
+    CH[Control Hub]
     EH[Expansion Hub]
     BAT[Battery]
     SW[Switch]
@@ -36,7 +38,7 @@
 
     end
 
-
+```
 limit switch - LS00 
 - Black - GND
 - White - Signal
@@ -48,4 +50,6 @@ Limit switch - LS01
 Pin 1 - GND
 Pin 2 - 3.3V
 Pin 3 - LS00(White)
+
 Pin 4 - LS01(Blue)
+
