@@ -31,6 +31,7 @@ public class MainTeleopOpMode extends CommandOpMode {
 
     @Override
     public void initialize() {
+        waitForStart();
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         s = new ShooterSubsystem(gamepadEx2, hardwareMap, telemetry);
@@ -50,7 +51,6 @@ public class MainTeleopOpMode extends CommandOpMode {
         Button shakeButton = new GamepadButton(
                 gamepadEx2, GamepadKeys.Button.Y);
         shakeButton.whileHeld(new shake(d));
-
     }
 
 }

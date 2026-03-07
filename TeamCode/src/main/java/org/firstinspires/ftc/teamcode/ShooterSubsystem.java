@@ -103,7 +103,7 @@ public  class ShooterSubsystem extends SubsystemBase {
 
         if(Up){
             flap.setPosition(250.0/300);
-            shooterSetSpeed=1550;
+            shooterSetSpeed=1650;
 
 
         }
@@ -116,7 +116,7 @@ public  class ShooterSubsystem extends SubsystemBase {
         }
         if (Left){
             flap.setPosition(150.0/300);
-            shooterSetSpeed=1300;
+            shooterSetSpeed=1350;
 
 
         }
