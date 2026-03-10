@@ -29,6 +29,8 @@ public class AutoBlueA1 extends CommandOpMode {
     @Override
     public void initialize() {
 
+
+
         follower = Constants.createFollower(hardwareMap);
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         GamepadEx gamepadEx = new GamepadEx(gamepad1);
