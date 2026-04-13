@@ -97,7 +97,6 @@ public  class ShooterSubsystem extends SubsystemBase {
 
 
 
-
         float shooter = gamepadEx.gamepad.left_stick_x;
 
 
